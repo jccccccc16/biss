@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <base href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/">
+<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
 <html>
 <head>
     <title>hello</title>

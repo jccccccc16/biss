@@ -3,6 +3,7 @@ package com.cjc.mvc.config;
 import com.cjc.util.CrowdUtil;
 import com.cjc.util.ResultEntity;
 import com.cjc.util.constant.CrowdConstant;
+import com.cjc.util.exception.AccessForbiddenException;
 import com.cjc.util.exception.LoginFailedException;
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -32,6 +33,21 @@ public class CrowdExceptionResolver {
         return commonResolveException(exception, request, response, viewName);
 
     }
+
+    @ExceptionHandler(value = AccessForbiddenException.class)
+    public ModelAndView resolveAccessForbiddenException(
+            LoginFailedException exception,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+
+        String viewName = "admin-login";
+
+        return commonResolveException(exception, request, response, viewName);
+
+    }
+
+
 
 
     /**
@@ -64,8 +80,6 @@ public class CrowdExceptionResolver {
         modelAndView.setViewName(viewName);
 
         return modelAndView;
-
-
     }
 
 

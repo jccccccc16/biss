@@ -2,13 +2,24 @@ package com.cjc.util.exception;
 
 import com.cjc.util.constant.CrowdConstant;
 
-public class LoginFailedException extends Exception {
+public class LoginFailedException extends RuntimeException {
+
     public LoginFailedException(){
-        super();
+        super(CrowdConstant.MESSAGE_LOGIN_FAILED);
     }
 
-    @Override
-    public String getMessage() {
-        return CrowdConstant.MESSAGE_LOGIN_FAILED;
+    public LoginFailedException(String message) {
+        super(message);
     }
+
+    public LoginFailedException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public LoginFailedException(Throwable cause) {
+        super(cause);
+    }
+
+
+
 }
