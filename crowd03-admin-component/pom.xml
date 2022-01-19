@@ -105,7 +105,7 @@
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
         </dependency>
-<!--        jsp-->
+        <!--        jsp-->
         <!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -123,6 +123,10 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
         </dependency>
 
 

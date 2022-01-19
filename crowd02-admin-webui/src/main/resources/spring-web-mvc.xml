@@ -19,6 +19,8 @@
     <mvc:annotation-driven/>
     <mvc:view-controller path="/admin/to/login/page.html" view-name="admin-login"/>
     <mvc:view-controller path="/admin/to/admin/main/page.html" view-name="admin-main"/>
+<!--    新增页面-->
+    <mvc:view-controller path="/admin/to/add/page.html" view-name="admin-add"></mvc:view-controller>
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>

@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CrowdUtil {
     /*** 判断当前请求是否为 Ajax 请求 * @param request * @return */
@@ -39,8 +41,19 @@ public class CrowdUtil {
         return null;
     }
 
+    /**
+     * 获取当前时间为
+     * @return
+     */
+    public static String getNow(String pattern){
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+        String format = dateFormat.format(new Date());
+        System.out.println(format);
+        return format;
+    }
+
     public static void main(String[] args) {
-        String md5 = md5("cjcisgood1316");
+        String md5 = md5("admin");
         System.out.println(md5);
     }
 }

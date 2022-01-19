@@ -1,6 +1,10 @@
 package com.cjc.service;
 
-import com.cjc.mapper.AdminMapper;
+import com.cjc.util.constant.CrowdConstant;
+import com.cjc.util.exception.LoginAcctDuplicateException;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import mapper.AdminMapper;
 import com.cjc.crowd.entity.Admin;
 import com.cjc.crowd.entity.AdminExample;
 import com.cjc.util.CrowdUtil;
@@ -8,6 +12,7 @@ import com.cjc.util.exception.LoginFailedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,9 +26,11 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminMapper adminMapper;
 
-    public List<Admin> findAll() {
-        List<Admin> admins = adminMapper.selectByExample(new AdminExample());
-        return admins;
+    public PageInfo<Admin> findAll(String keyword,Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Admin> adminList = adminMapper.selectAdmin(keyword);
+        PageInfo<Admin> adminPageInfo = new PageInfo<Admin>(adminList);
+        return adminPageInfo;
     }
 
     public Admin getAdminByLoginAcct(String loginAcct,String userPswd) {
@@ -51,5 +58,21 @@ public class AdminServiceImpl implements AdminService {
         // 将登录对象密码置空
         admin.setUserPswd(null);
         return admin;
+    }
+
+    public void saveAdmin(Admin admin)  {
+
+        admin.setUserPswd(CrowdUtil.md5(admin.getUserPswd()));
+        admin.setCreateTime(CrowdUtil.getNow(CrowdConstant.DATE_PATTERN_01));
+        try{
+            adminMapper.insert(admin);
+            // 账号重复异常
+        }catch (Exception e){
+            e.printStackTrace();
+            if(e instanceof DuplicateKeyException){
+                throw new LoginAcctDuplicateException();
+            }
+
+        }
     }
 }

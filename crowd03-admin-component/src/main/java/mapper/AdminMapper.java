@@ -1,4 +1,4 @@
-package com.cjc.mapper;
+package mapper;
 
 
 import com.cjc.crowd.entity.Admin;
@@ -31,4 +31,11 @@ public interface AdminMapper {
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
+
+    /**
+     * 查询管理员
+     * @param value 查询条件
+     * @return
+     */
+    List<Admin> selectAdmin(String value);
 }

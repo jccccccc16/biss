@@ -4,6 +4,7 @@ import com.cjc.util.CrowdUtil;
 import com.cjc.util.ResultEntity;
 import com.cjc.util.constant.CrowdConstant;
 import com.cjc.util.exception.AccessForbiddenException;
+import com.cjc.util.exception.LoginAcctDuplicateException;
 import com.cjc.util.exception.LoginFailedException;
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -36,12 +37,25 @@ public class CrowdExceptionResolver {
 
     @ExceptionHandler(value = AccessForbiddenException.class)
     public ModelAndView resolveAccessForbiddenException(
-            LoginFailedException exception,
+            AccessForbiddenException exception,
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException {
 
         String viewName = "admin-login";
+
+        return commonResolveException(exception, request, response, viewName);
+
+    }
+
+    @ExceptionHandler(value = LoginAcctDuplicateException.class)
+    public ModelAndView resolveLoginAcctDuplicateException(
+            LoginAcctDuplicateException exception,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+
+        String viewName = "admin-add";
 
         return commonResolveException(exception, request, response, viewName);
 

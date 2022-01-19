@@ -2,13 +2,18 @@ package cjc.mapper;
 
 import com.cjc.crowd.entity.Admin;
 import com.cjc.crowd.entity.AdminExample;
-import com.cjc.mapper.AdminMapper;
+import com.cjc.util.CrowdUtil;
+import com.cjc.util.constant.CrowdConstant;
+import mapper.AdminMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,6 +30,31 @@ public class AdminMapperTest {
         for (Admin admin : admins) {
             System.out.println(admin);
         }
+    }
+    @Test
+    public void selectAdmin(){
+        List<Admin> adminList = adminMapper.selectAdmin("ad");
+        for (Admin admin : adminList) {
+            System.out.println(admin);
+        }
+    }
+
+    @Test
+    public void doSomething(){
+
+
+    }
+
+    @Test
+    public void insert(){
+
+        for(int i=0;i<50;i++){
+
+            Admin admin = new Admin(null,"admin" + i, CrowdUtil.md5("admin"+i), "admin" + i, "admin@qq.com", CrowdUtil.getNow(CrowdConstant.DATE_PATTERN_01));
+            System.out.println(admin);
+            adminMapper.insertSelective(admin);
+        }
+
     }
 }
 

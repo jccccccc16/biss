@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cjc.mapper.AdminMapper" >
+<mapper namespace="mapper.AdminMapper" >
   <resultMap id="BaseResultMap" type="com.cjc.crowd.entity.Admin" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="login_acct" property="loginAcct" jdbcType="VARCHAR" />
@@ -70,6 +70,18 @@
   <sql id="Base_Column_List" >
     id, login_acct, user_pswd, user_name, email, create_time
   </sql>
+  <select id="selectAdmin" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from t_admin
+    where 1=1
+    <if test="value!=null">
+      and login_acct like concat("%",#{value},"%")
+      or user_pswd like concat("%",#{value},"%")
+      or user_name like concat("%",#{value},"%")
+      or email like concat("%",#{value},"%")
+    </if>
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cjc.crowd.entity.AdminExample" >
     select
     <if test="distinct" >
@@ -101,10 +113,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cjc.crowd.entity.Admin" >
-    insert into t_admin (id, login_acct, user_pswd, 
+    insert into t_admin (login_acct, user_pswd,
       user_name, email, create_time
       )
-    values (#{id,jdbcType=INTEGER}, #{loginAcct,jdbcType=VARCHAR}, #{userPswd,jdbcType=CHAR}, 
+    values (#{loginAcct,jdbcType=VARCHAR}, #{userPswd,jdbcType=CHAR},
       #{userName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}
       )
   </insert>

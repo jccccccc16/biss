@@ -26,11 +26,23 @@
 
         <!-- 装配数据源 -->
         <property name="dataSource" ref="dataSource"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <props>
+                            <prop key="dialect"></prop>
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
     <!-- 配置MapperScannerConfigurer来扫描Mapper接口所在的包 -->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.cjc.mapper"/>
+        <property name="basePackage" value="mapper"/>
     </bean>
 
 </beans>
