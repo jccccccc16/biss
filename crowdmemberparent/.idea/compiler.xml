@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="crowdmembermysqlprovider" />
+        <module name="crowdmemberredisprovider" />
+        <module name="crowdmemberzuul" />
+        <module name="crowdmembereureka" />
+        <module name="crwodmemberpayconsumer" />
+        <module name="crowdmemberapi" />
+        <module name="crowdmemberprojectconsumer" />
+        <module name="crowdmemberauthenticationconsumer" />
+        <module name="crowdmemberutil" />
+        <module name="crowdmemberorderconsumer" />
+        <module name="crowdmemberentity" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

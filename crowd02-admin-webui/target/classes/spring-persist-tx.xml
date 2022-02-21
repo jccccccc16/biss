@@ -12,8 +12,7 @@
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
 
-    <!-- 配置自动扫描的包：主要是为了把Service扫描到IOC容器中 -->
-    <context:component-scan base-package="com.cjc.service"/>
+
 <!-- 配置事务管理器 -->
 <bean id="dataSourceTransactionManager"
       class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> <!-- 装配数据源 -->

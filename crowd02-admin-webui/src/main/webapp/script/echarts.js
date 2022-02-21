@@ -39221,7 +39221,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            applyVisual: makeApplyVisual('color'),
 
 	            /**
-	             * Create a mapper function
+	             * Create a com.cjc.mapper function
 	             * @return {Function}
 	             */
 	            getColorMapper: function () {
@@ -52979,13 +52979,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            // [group0, group1, ...]
 	            // Each group can be: {
-	            //      mapper: function () {},
+	            //      com.cjc.mapper: function () {},
 	            //      singleTooltip: 'multiple',  // 'multiple' or 'single'
 	            //      xAxisId: ...,
 	            //      yAxisName: ...,
 	            //      angleAxisIndex: ...
 	            // }
-	            // mapper: can be ignored.
+	            // com.cjc.mapper: can be ignored.
 	            //      input: {axisInfo, value}
 	            //      output: {axisInfo, value}
 	            link: [],

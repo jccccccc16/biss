@@ -42,7 +42,7 @@
 
     <!-- 配置MapperScannerConfigurer来扫描Mapper接口所在的包 -->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="mapper"/>
+        <property name="basePackage" value="com.cjc.mapper"/>
     </bean>
 
 </beans>

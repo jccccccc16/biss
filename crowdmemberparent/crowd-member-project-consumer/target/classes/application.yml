@@ -1,0 +1,36 @@
+server:
+  port: 5000
+spring:
+  application:
+    name: cjc-crowd-project
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false #使用Thymeleaf模板引擎，关闭缓存
+  redis:
+    host: 114.132.251.6
+  session:
+    store-type: redis
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+
+ribbon:
+  # 值的是建立连接所用的时间，使用与网络状态正常的情况，两端连接所用的时间
+  ReadTimeout: 5000
+  # 指的是建立连接后从服务器读取到可用资源所用的时间
+  ConnectionTimeout: 5000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+
+
+aliyun:
+  oss:
+    access-key-id: LTAI5tRNg64nQG835So9XDvr
+    access-key-secret: e4XmhAW2Pnf29nTPhLpHDhKte48N54
+    bucket-domain: http://forcjccrowd.oss-cn-guangzhou.aliyuncs.com
+    bucket-name: forcjccrowd
+    end-point: http://oss-cn-guangzhou.aliyuncs.com

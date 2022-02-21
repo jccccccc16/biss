@@ -6,9 +6,9 @@ public class ResultEntity<T> {
     public static final String NO_MESSAGE = "NO_MESSAGE";
     public static final String NO_DATA = "NO_DATA";
 
-    private String operationResult;
-    private String operationMessage;
-    private T queryData;
+    private String result;
+    private String message;
+    private T data;
 
     /*** 返回操作结果为成功，不带数据 * @return */
     public static <E> ResultEntity<E> successWithoutData() {
@@ -30,40 +30,40 @@ public class ResultEntity<T> {
     public ResultEntity() {
     }
 
-    public ResultEntity(String operationResult, String operationMessage, T queryData) {
+    public ResultEntity(String result, String message, T data) {
         super();
-        this.operationResult = operationResult;
-        this.operationMessage = operationMessage;
-        this.queryData = queryData;
+        this.result = result;
+        this.message = message;
+        this.data = data;
     }
 
     @Override
     public String toString() {
-        return "AjaxResultEntity [operationResult=" + operationResult + ", operationMessage=" + operationMessage + ", queryData=" + queryData + "]";
+        return "AjaxResultEntity [result=" + result + ", message=" + message + ", data=" + data + "]";
     }
 
-    public String getOperationResult() {
-        return operationResult;
+    public String getResult() {
+        return result;
     }
 
-    public void setOperationResult(String operationResult) {
-        this.operationResult = operationResult;
+    public void setResult(String result) {
+        this.result = result;
     }
 
-    public String getOperationMessage() {
-        return operationMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setOperationMessage(String operationMessage) {
-        this.operationMessage = operationMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public T getQueryData() {
-        return queryData;
+    public T getData() {
+        return data;
     }
 
-    public void setQueryData(T queryData) {
-        this.queryData = queryData;
+    public void setData(T data) {
+        this.data = data;
     }
 }
 

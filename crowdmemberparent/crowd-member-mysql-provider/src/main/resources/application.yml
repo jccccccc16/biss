@@ -1,0 +1,35 @@
+server:
+  port: 2000
+spring:
+  application:
+    name: cjc-crowd-mysql
+  datasource:
+    name: cjccrwod
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://114.132.251.6:3306/cjccrowd?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: cjcisgood1316
+    driver-class-name: com.mysql.cj.jdbc.Driver
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*Mapper.xml
+logging:
+  level:
+    com.cjc.crowd.mapper: debug
+    com.cjc.crowd.test: debug
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 6000 # 熔断超时时长：6000ms[默认是1秒]
+ribbon:
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
+  eureka:
+    enabled: true

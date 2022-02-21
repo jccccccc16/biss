@@ -4,16 +4,13 @@ import com.cjc.crowd.entity.Admin;
 import com.cjc.crowd.entity.AdminExample;
 import com.cjc.util.CrowdUtil;
 import com.cjc.util.constant.CrowdConstant;
-import mapper.AdminMapper;
+import com.cjc.mapper.AdminMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)

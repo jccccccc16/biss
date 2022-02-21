@@ -1,0 +1,26 @@
+server:
+  port: 1000
+spring:
+  application:
+    name: cjc-crowd-eureka
+eureka:
+  instance:
+    hostname: localhost     # 配置当前Eureka服务的主机地址
+  client:
+    register-with-eureka: false   # 不需要注册到注册中心
+    fetch-registry: false    # 不需要从注册中心抓取信息
+  service-url:             # 客户端（指consumer、provider）访问当前注册中心时使用的地址
+    defaultZone: http://${eureka.instance.hostname}/${server.port}/eureka
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 6000 # 熔断超时时长：6000ms[默认是1秒]
+ribbon:
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
+  eureka:
+    enabled: true

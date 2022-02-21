@@ -4,7 +4,7 @@ import com.cjc.util.constant.CrowdConstant;
 import com.cjc.util.exception.LoginAcctDuplicateException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import mapper.AdminMapper;
+import com.cjc.mapper.AdminMapper;
 import com.cjc.crowd.entity.Admin;
 import com.cjc.crowd.entity.AdminExample;
 import com.cjc.util.CrowdUtil;
