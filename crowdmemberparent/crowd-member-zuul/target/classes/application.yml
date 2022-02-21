@@ -4,7 +4,7 @@ spring:
   application:
     name: cjc-crowd-zuul
   redis:
-    host: 114.132.251.6
+    host: *
   session:
     store-type: redis
 

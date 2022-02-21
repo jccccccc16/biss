@@ -6,7 +6,7 @@ spring:
   datasource:
     name: cjccrwod
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://114.132.251.6:3306/cjccrowd?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    url: jdbc:mysql://*/cjccrowd?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     username: root
     password: cjcisgood1316
     driver-class-name: com.mysql.cj.jdbc.Driver
