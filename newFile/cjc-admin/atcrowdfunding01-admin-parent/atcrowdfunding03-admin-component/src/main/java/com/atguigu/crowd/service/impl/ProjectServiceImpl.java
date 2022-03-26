@@ -65,4 +65,31 @@ public class ProjectServiceImpl implements ProjectService {
         List<ProjectReview> projectReviews = projectPOMapper.selectProjectReviews();
         return new PageInfo<ProjectReview>(projectReviews);
     }
+
+    @Override
+    public int doReview(Integer id) {
+        ProjectPO projectPO = new ProjectPO();
+        projectPO.setId(id);
+        projectPO.setStatus(1);
+        int i = projectPOMapper.updateByPrimaryKeySelective(projectPO);
+        return i;
+    }
+
+    @Override
+    public int doDisReview(Integer projectId,String message) {
+        ProjectPO projectPO = new ProjectPO();
+        projectPO.setId(projectId);
+        projectPO.setStatus(2);
+        projectPO.setMessage(message);
+        int i = projectPOMapper.updateByPrimaryKeySelective(projectPO);
+        return i;
+    }
+
+    @Override
+    public PageInfo<ProjectReview> getProjects(Integer pageNum, Integer pageSize) {
+        // 查找除了待审核，和审核不通过的项目
+        PageHelper.startPage(pageNum,pageSize);
+        List<ProjectReview> projectReviewList = projectPOMapper.selectProjectsWithoutStatusEqualTo0and2();
+        return new PageInfo<ProjectReview>(projectReviewList);
+    }
 }

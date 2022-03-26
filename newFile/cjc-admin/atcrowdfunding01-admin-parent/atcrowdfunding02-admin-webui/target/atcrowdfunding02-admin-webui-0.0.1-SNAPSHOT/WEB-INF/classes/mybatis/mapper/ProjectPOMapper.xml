@@ -227,7 +227,7 @@
 	</sql>
 
 	<select id="selectProjectReviews" resultMap="projectReview">
-		SELECT p.*,m.loginacct FROM t_project p  LEFT JOIN t_member m ON p.memberid = m.id WHERE p.status = 0 OR p.status = 2
+		SELECT p.*,m.loginacct FROM t_project p  LEFT JOIN t_member m ON p.memberid = m.id WHERE p.status = 0 or p.status=2
 	</select>
 	<select id="selectByExample" resultMap="BaseResultMap"
 		parameterType="com.atguigu.crowd.entity.ProjectPOExample">
@@ -243,6 +243,9 @@
 		<if test="orderByClause != null">
 			order by ${orderByClause}
 		</if>
+	</select>
+	<select id="selectProjectsWithoutStatusEqualTo0and2" resultMap="projectReview">
+		SELECT p.*,m.loginacct FROM t_project p  LEFT JOIN t_member m ON p.memberid = m.id WHERE p.status != 0 and p.status!=2
 	</select>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">

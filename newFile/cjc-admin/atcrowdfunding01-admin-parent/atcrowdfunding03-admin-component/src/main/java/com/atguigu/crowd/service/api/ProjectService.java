@@ -22,4 +22,10 @@ public interface ProjectService {
     ProjectDetailVO getDetailProjectVO(Integer id);
 
     PageInfo<ProjectReview> getProjectReviews(Integer pageNum,Integer pageSize);
+
+    int doReview(Integer id);
+
+    int doDisReview(Integer projectId,String message);
+
+    PageInfo<ProjectReview> getProjects(Integer pageNum,Integer pageSize);
 }

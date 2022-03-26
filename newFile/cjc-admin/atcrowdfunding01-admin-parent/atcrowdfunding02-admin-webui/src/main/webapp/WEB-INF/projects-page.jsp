@@ -5,6 +5,7 @@
   Date: 2020/9/20
   Time: 19:09
   To change this template use File | Settings | File Templates.
+  项目管理
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" isELIgnored="false" %>
 <html lang="zh-CN">
@@ -115,25 +116,37 @@
                         </thead>
                         <tbody>
                         <%--                            如果数据集为空--%>
-                        <c:if test="${empty requestScope.pageInfo.list}">
-                            <tr>
-                                <td colspan="6" align="center">抱歉，没有数据</td>
-                            </tr>
-                        </c:if>
+
                         <tr>
+                            <c:if test="${empty requestScope.pageInfo.list}">
+
+                                <td colspan="6" align="center">抱歉，没有数据</td>
+
+                            </c:if>
+
                             <%--                            如果数据集不为空--%>
                             <c:if test="${!empty requestScope.pageInfo.list}">
-                                <c:forEach items="${requestScope.pageInfo.list}" var="projectReview" varStatus="myStatus">
+                                <c:forEach items="${requestScope.pageInfo.list}" var="projectReview"
+                                           varStatus="myStatus">
                                     <td>${myStatus.count}</td>
                                     <td>${projectReview.projectPO.projectName}</td>
                                     <td>${projectReview.loginAcct}</td>
                                     <td>${projectReview.projectPO.createdate}</td>
                                     <td>
-                                        <c:if test="${projectReview.projectPO.status==0}">
-                                            待审核
+                                        <c:if test="${projectReview.projectPO.status==1}">
+                                            众筹中
                                         </c:if>
-                                        <c:if test="${projectReview.projectPO.status==2}">
-                                            审核不通过
+                                        <c:if test="${projectReview.projectPO.status==3}">
+                                            众筹成功，待转账
+                                        </c:if>
+                                        <c:if test="${projectReview.projectPO.status==4}">
+                                            众筹失败，待退款
+                                        </c:if>
+                                        <c:if test="${projectReview.projectPO.status==5}">
+                                            众筹失败，资金已退回
+                                        </c:if>
+                                        <c:if test="${projectReview.projectPO.status==6}">
+                                            众筹成功，已转账
                                         </c:if>
                                     </td>
 
@@ -141,13 +154,25 @@
                                             ${projectReview.message}
                                     </td>
                                     <td>
-                                        <c:if test="${projectReview.projectPO.status==0}">
-                                            <a id="reviewA" href="project/to/review/project.html?projectId=${projectReview.projectPO.id}" class="btn btn-danger btn-xs"><i
-                                                    class="glyphicon glyphicon-search"></i>审核</a>
-                                        </c:if>
-                                        <c:if test="${projectReview.projectPO.status==2}">
+                                        <c:if test="${projectReview.projectPO.status==1}">
                                             <a id="checkProjectA" class="btn btn-primary btn-xs"><i
                                                     class="glyphicon glyphicon-search"></i>查看项目</a>
+                                        </c:if>
+                                        <c:if test="${projectReview.projectPO.status==3}">
+                                            <a id="checkProjectA" class="btn btn-primary btn-xs"><i
+                                                    class="glyphicon glyphicon-search"></i>去转账</a>
+                                        </c:if>
+                                        <c:if test="${projectReview.projectPO.status==4}">
+                                            <a id="checkProjectA" class="btn btn-primary btn-xs"><i
+                                                    class="glyphicon glyphicon-search"></i>去退款</a>
+                                        </c:if>
+                                        <c:if test="${projectReview.projectPO.status==5}">
+                                            <a id="checkProjectA" class="btn btn-primary btn-xs"><i
+                                                    class="glyphicon glyphicon-search"></i>查看账单</a>
+                                        </c:if>
+                                        <c:if test="${projectReview.projectPO.status==6}">
+                                            <a id="checkProjectA" class="btn btn-primary btn-xs"><i
+                                                    class="glyphicon glyphicon-search"></i>查看账单</a>
                                         </c:if>
                                     </td>
                                 </c:forEach>

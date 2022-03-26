@@ -107,6 +107,7 @@
                             <th width="30">#</th>
                             <th>项目名称</th>
                             <th>众筹发起人</th>
+                            <th>发起时间</th>
                             <th>当前状态</th>
                             <th>备注</th>
                             <th width="100">操作</th>
@@ -126,6 +127,7 @@
                                     <td>${myStatus.count}</td>
                                     <td>${projectReview.projectPO.projectName}</td>
                                     <td>${projectReview.loginAcct}</td>
+                                    <td>${projectReview.projectPO.createdate}</td>
                                     <td>
                                         <c:if test="${projectReview.projectPO.status==0}">
                                             待审核

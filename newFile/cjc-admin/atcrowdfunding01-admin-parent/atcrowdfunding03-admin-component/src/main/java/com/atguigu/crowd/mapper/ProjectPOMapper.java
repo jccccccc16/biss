@@ -40,5 +40,11 @@ public interface ProjectPOMapper {
 
     List<ProjectReview> selectProjectReviews();
 
+    /**
+     * 查找除了
+     * @return
+     */
+    List<ProjectReview> selectProjectsWithoutStatusEqualTo0and2();
+
 
 }
