@@ -1,17 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="zh-CN">
-<%@include file="/WEB-INF/include-head.jsp"%>
-<link rel="stylesheet" href="css/pagination.css" />
+<html lang="en">
+<%@include file="/WEB-INF/include-head.jsp" %>
+<link rel="stylesheet" href="css/pagination.css"/>
 <script type="text/javascript" src="jquery/jquery.pagination.js"></script>
 <script type="text/javascript">
 
-    $(function(){
+
+
+    $(function () {
 
         // 调用后面声明的函数对页码导航条进行初始化操作
         initPagination();
+
+
 
     });
 
@@ -46,7 +50,7 @@
         var pageNum = pageIndex + 1;
 
         // 跳转页面
-        window.location.href = "admin/page.html?pageNum="+pageNum+"&keyword=${param.keyword}";
+        window.location.href = "admin/page.html?pageNum=" + pageNum + "&keyword=${param.keyword}";
 
         // 由于每一个页码按钮都是超链接，所以在这个函数最后取消超链接的默认行为
         return false;
@@ -55,6 +59,7 @@
 </script>
 
 <body>
+<%@ include file="/WEB-INF/include-nav.jsp" %>
 <div class="container-fluid">
     <div class="row">
         <%@include file="/WEB-INF/include-sidebar.jsp" %>
@@ -123,8 +128,8 @@
                                         <td>
                                             <button type="button" class="btn btn-success btn-xs"><i
                                                     class=" glyphicon glyphicon-check"></i></button>
-                                            <button type="button" class="btn btn-primary btn-xs"><i
-                                                    class=" glyphicon glyphicon-pencil"></i></button>
+                                            <a type="button" href="admin/to/admin/edit/page.html?adminId=${admin.id}" class="btn btn-primary btn-xs"><i
+                                                    class=" glyphicon glyphicon-pencil"></i></a>
                                             <button type="button" class="btn btn-danger btn-xs"><i
                                                     class=" glyphicon glyphicon-remove"></i></button>
                                         </td>

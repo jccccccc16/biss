@@ -1,7 +1,7 @@
 
 spring:
   redis:
-    host: *
+    host: 114.132.251.6
     port: 6379
   application:
     name: cjc-crowd-redis

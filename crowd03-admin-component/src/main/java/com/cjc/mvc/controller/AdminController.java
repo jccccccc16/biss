@@ -2,8 +2,10 @@ package com.cjc.mvc.controller;
 
 
 import com.cjc.crowd.entity.Admin;
+import com.cjc.crowd.entity.vo.AdminEditView;
 import com.cjc.service.AdminService;
 import com.cjc.util.constant.CrowdConstant;
+import com.cjc.util.exception.CommonException;
 import com.cjc.util.exception.LoginFailedException;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.jws.WebParam;
 import javax.print.DocFlavor;
 import javax.servlet.http.HttpSession;
 
@@ -77,6 +80,30 @@ public class AdminController {
     public String addAdmin(Admin admin){
         adminService.saveAdmin(admin);
         return "redirect:/admin/page.html?pageNum="+Integer.MAX_VALUE;
+    }
+
+    @RequestMapping("/admin/to/admin/edit/page.html")
+    public String toEditPage(@RequestParam("adminId") Integer adminId,ModelMap modelMap){
+        Admin admin = adminService.getAdminById(adminId);
+        if(admin==null){
+            throw new CommonException("出现错误，请重试");
+        }
+        AdminEditView adminEditView = new AdminEditView();
+        adminEditView.setId(admin.getId());
+        adminEditView.setEmail(admin.getEmail());
+        adminEditView.setLoginAcct(admin.getLoginAcct());
+        adminEditView.setUserName(admin.getUserName());
+        modelMap.addAttribute("admin",adminEditView);
+        return "admin-edit";
+    }
+
+    @RequestMapping("/admin/do/admin/edit.html")
+    public String doEdit(AdminEditView adminEditView){
+        int result = adminService.updateAdmin(adminEditView);
+        if(result==0){
+            throw new CommonException("出现错误，请重试");
+        }
+        return "redirect:/admin/page.html";
     }
 
 }

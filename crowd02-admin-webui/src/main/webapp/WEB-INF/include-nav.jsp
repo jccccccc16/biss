@@ -4,7 +4,7 @@
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<div>
-				<a class="navbar-brand" style="font-size: 32px;" href="#">大学生创新创业众筹平台 -
+				<a class="navbar-brand" style="font-size: 32px;" href="admin/to/admin/main/page.html">大学生创新创业众筹平台 -
 					后台</a>
 			</div>
 		</div>

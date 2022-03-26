@@ -2,6 +2,7 @@ package com.cjc.service;
 
 
 import com.cjc.crowd.entity.Admin;
+import com.cjc.crowd.entity.vo.AdminEditView;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -26,4 +27,8 @@ public interface AdminService {
 
 
     void saveAdmin(Admin admin);
+
+    Admin getAdminById(Integer adminId);
+
+    int updateAdmin(AdminEditView adminEditView);
 }

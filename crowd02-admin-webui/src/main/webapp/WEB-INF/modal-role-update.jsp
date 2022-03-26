@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">大学生创新创业众筹平台</h4></div>
+                <h4 class="modal-title">角色更新弹窗</h4></div>
             <div class="modal-body">
                 <form class="form-signin" role="form">
                     <div class="form-group has-success has-feedback">

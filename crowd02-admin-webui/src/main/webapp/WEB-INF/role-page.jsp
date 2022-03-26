@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <%@include file="/WEB-INF/include-head.jsp"%>
 <%@include file="/WEB-INF/modal-role-add.jsp"%>
 <%@include file="/WEB-INF/modal-role-update.jsp"%>
 <link rel="stylesheet" href="css/pagination.css" />
-<script type="text/javascript" charset="gb2312" src="jquery/jquery.pagination.js"></script>
-<script type="text/javascript" charset="gb2312" src="myjs/my-role.js"></script>
+<script type="text/javascript" charset="UTF-8" src="jquery/jquery.pagination.js"></script>
+<script type="text/javascript" charset="UTF-8" src="myjs/my-role.js"></script>
 <script type="text/javascript">
     $(function () {
         // 分页初始化数据

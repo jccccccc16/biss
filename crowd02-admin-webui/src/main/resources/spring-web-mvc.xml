@@ -22,8 +22,9 @@
     <mvc:view-controller path="/admin/to/login/page.html" view-name="admin-login"/>
     <mvc:view-controller path="/admin/to/admin/main/page.html" view-name="admin-main"/>
 <!--    新增页面-->
-    <mvc:view-controller path="/admin/to/add/page.html" view-name="admin-add"></mvc:view-controller>
-    <mvc:view-controller path="/role/page.html" view-name="role-page"></mvc:view-controller>
+    <mvc:view-controller path="/admin/to/add/page.html" view-name="admin-add"/>
+    <mvc:view-controller path="/menu/to/page.html" view-name="menu-page"/>
+    <mvc:view-controller path="/role/page.html" view-name="role-page"/>
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
@@ -32,6 +33,14 @@
             <mvc:exclude-mapping path="/admin/logout.html"/>
             <mvc:exclude-mapping path="/index.html"/>
             <bean class="com.cjc.mvc.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/admin/to/login/page.html"/>
+            <mvc:exclude-mapping path="/admin/login.html"/>
+            <mvc:exclude-mapping path="/admin/logout.html"/>
+            <mvc:exclude-mapping path="/index.html"/>
+            <bean class="com.cjc.mvc.interceptor.MenuGenerateInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
 

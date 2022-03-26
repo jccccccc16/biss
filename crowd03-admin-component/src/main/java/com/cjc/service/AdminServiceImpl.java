@@ -1,5 +1,6 @@
 package com.cjc.service;
 
+import com.cjc.crowd.entity.vo.AdminEditView;
 import com.cjc.util.constant.CrowdConstant;
 import com.cjc.util.exception.LoginAcctDuplicateException;
 import com.github.pagehelper.PageHelper;
@@ -11,6 +12,7 @@ import com.cjc.util.CrowdUtil;
 import com.cjc.util.exception.LoginFailedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -66,6 +68,7 @@ public class AdminServiceImpl implements AdminService {
         admin.setCreateTime(CrowdUtil.getNow(CrowdConstant.DATE_PATTERN_01));
         try{
             adminMapper.insert(admin);
+            logger.info(admin.getUserName()+" 插入成功");
             // 账号重复异常
         }catch (Exception e){
             e.printStackTrace();
@@ -74,5 +77,18 @@ public class AdminServiceImpl implements AdminService {
             }
 
         }
+    }
+
+    public Admin getAdminById(Integer adminId) {
+        Admin admin = adminMapper.selectByPrimaryKey(adminId);
+
+        return admin;
+    }
+
+    public int updateAdmin(AdminEditView adminEditView) {
+        Admin admin = new Admin();
+        BeanUtils.copyProperties(adminEditView,admin);
+        int result = adminMapper.updateByPrimaryKeySelective(admin);
+        return result;
     }
 }

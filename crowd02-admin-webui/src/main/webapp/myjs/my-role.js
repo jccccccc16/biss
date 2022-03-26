@@ -69,7 +69,7 @@ function fillTableBody(pageInfo) {
 function generateNavigator(pageInfo){
     // 获取总记录数
     var totalRecord = pageInfo.total; // 声明相关属性
-    var properties = { "num_edge_entries": 3, "num_display_entries": 5, "callback": paginationCallBack, "items_per_page": pageInfo.pageSize, "current_page": pageInfo.pageNum - 1, "prev_text": "上一页", "next_text": "下一页" }
+    var properties = { "num_edge_entries": 3, "num_display_entries": 5, "callback": paginationCallBack, "items_per_page": pageInfo.pageSize, "current_page": pageInfo.pageNum - 1, "prev_text": "pre", "next_text": "next" }
     // 调用 pagination()函数
     $("#Pagination").pagination(totalRecord, properties);
 }

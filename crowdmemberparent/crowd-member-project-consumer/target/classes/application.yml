@@ -8,7 +8,7 @@ spring:
     suffix: .html
     cache: false #使用Thymeleaf模板引擎，关闭缓存
   redis:
-    host: *
+    host: 114.132.251.6
   session:
     store-type: redis
   devtools:
@@ -29,8 +29,8 @@ eureka:
 
 aliyun:
   oss:
-    access-key-id: *
-    access-key-secret: *
+    access-key-id: LTAI5tRNg64nQG835So9XDvr
+    access-key-secret: e4XmhAW2Pnf29nTPhLpHDhKte48N54
     bucket-domain: http://forcjccrowd.oss-cn-guangzhou.aliyuncs.com
     bucket-name: forcjccrowd
     end-point: http://oss-cn-guangzhou.aliyuncs.com
