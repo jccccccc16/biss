@@ -18,7 +18,7 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <style>
 </style>
-<title>尚筹网</title>
+<title>大学生创新创业众筹平台</title>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -32,12 +32,14 @@
 	</nav>
 
 	<div class="container">
-
+		<%--登录交由spring security操作--%>
 		<form action="security/do/login.html" method="post" class="form-signin" role="form">
 			<h2 class="form-signin-heading">
-				管理员登录
-			</h2>
+				众筹平台管理员登录
+			</h2>e
+			<%-- 显示错误信息--%>
 			<p>${requestScope.exception.message }</p>
+			<%--显示spring scurity的错误信息--%>
 			<p>${SPRING_SECURITY_LAST_EXCEPTION.message }</p>
 			<div class="form-group has-success has-feedback">
 				<input type="text" name="loginAcct" value="admin" class="form-control" id="inputSuccess4"

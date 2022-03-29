@@ -3,17 +3,60 @@ package com.atguigu.crowd.util;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.atguigu.crowd.constant.CrowdConstant;
 
 /**
- * 尚筹网项目通用工具方法类
- * @author 吴彦祖
- *
+ * 工具类
  */
 public class CrowdUtil {
+
+	/**
+	 * 获取当前时间为
+	 *
+	 * @return
+	 */
+	public static String getNow(String pattern) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+		String format = dateFormat.format(new Date());
+		System.out.println(format);
+		return format;
+	}
+
+	/**
+	 * 获取该时间与现在时间的时间差
+	 * 如果是负数，该项目不可用
+	 * 用于判断是否众筹失败
+	 * @param day 众筹天数
+	 * @param createDate 发起日期
+	 * @return
+	 */
+
+	public static Integer getDateSub(int day,String createDate){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		/*天数差*/
+		Date now = new Date();
+		try {
+
+			Date toDate1 = simpleDateFormat.parse(createDate);
+			long from1 = now.getTime();
+			long to1 = toDate1.getTime();
+			int days = (int) ((to1 - from1) / (1000 * 60 * 60 * 24))+day;
+			System.out.println("两个时间之间的天数差为：" + days);
+			return days;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+
 	
 	/**
 	 * 对明文字符串进行MD5加密

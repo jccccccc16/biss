@@ -50,20 +50,24 @@
 					var result = response.result;
 					
 					if(result == "SUCCESS") {
+                        window.location.reload()
 						layer.msg("操作成功！");
 						
 						// 重新加载树形结构，注意：要在确认服务器端完成保存操作后再刷新
 						// 否则有可能刷新不到最新的数据，因为这里是异步的
 						generateTree();
+
 					}
 					
 					if(result == "FAILED") {
+
 						layer.msg("操作失败！"+response.message);
 					}
 				},
 				"error":function(response){
 					layer.msg(response.status+" "+response.statusText);
 				}
+
 			});
 			
 			// 关闭模态框
@@ -129,6 +133,7 @@
 					var result = response.result;
 					
 					if(result == "SUCCESS") {
+                        window.location.reload()
 						layer.msg("操作成功！");
 						
 						// 重新加载树形结构，注意：要在确认服务器端完成保存操作后再刷新
@@ -158,7 +163,7 @@
 			
 			// 打开模态框
 			$("#menuConfirmModal").modal("show");
-		
+
 			// 获取zTreeObj对象
 			var zTreeObj = $.fn.zTree.getZTreeObj("treeDemo");
 			
@@ -176,7 +181,7 @@
 			return false;
 		});
 		
-		// 给确认模态框中的OK按钮绑定单击响应函数
+		// 确定删除
 		$("#confirmBtn").click(function(){
 			
 			$.ajax({
@@ -190,9 +195,8 @@
 					var result = response.result;
 					
 					if(result == "SUCCESS") {
+                        window.location.reload()
 						layer.msg("操作成功！");
-						
-						// 重新加载树形结构，注意：要在确认服务器端完成保存操作后再刷新
 						// 否则有可能刷新不到最新的数据，因为这里是异步的
 						generateTree();
 					}

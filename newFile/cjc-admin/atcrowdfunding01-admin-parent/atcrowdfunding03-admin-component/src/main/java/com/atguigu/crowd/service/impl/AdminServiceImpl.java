@@ -41,8 +41,8 @@ public class AdminServiceImpl implements AdminService {
 		
 		// 1.密码加密
 		String userPswd = admin.getUserPswd();
-		// userPswd = CrowdUtil.md5(userPswd);
-		userPswd = passwordEncoder.encode(userPswd);
+		userPswd = CrowdUtil.md5(userPswd); // 使用md5加密
+//		userPswd = passwordEncoder.encode(userPswd);
 		admin.setUserPswd(userPswd);
 		
 		// 2.生成创建时间
@@ -54,6 +54,7 @@ public class AdminServiceImpl implements AdminService {
 		// 3.执行保存
 		try {
 			adminMapper.insert(admin);
+			logger.info("用户 "+admin.getLoginAcct()+" 插入成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 			

@@ -120,14 +120,15 @@
                                 <td colspan="6" align="center">抱歉，没有数据</td>
                             </tr>
                         </c:if>
-                        <tr>
-                            <%--                            如果数据集不为空--%>
-                            <c:if test="${!empty requestScope.pageInfo.list}">
-                                <c:forEach items="${requestScope.pageInfo.list}" var="projectReview" varStatus="myStatus">
+                        <%--                            如果数据集不为空--%>
+                        <c:if test="${!empty requestScope.pageInfo.list}">
+                            <c:forEach items="${requestScope.pageInfo.list}" var="projectReview" varStatus="myStatus">
+                                <tr>
+
                                     <td>${myStatus.count}</td>
                                     <td>${projectReview.projectPO.projectName}</td>
                                     <td>${projectReview.loginAcct}</td>
-                                    <td>${projectReview.projectPO.createdate}</td>
+                                    <td>${projectReview.projectPO.deploydate}</td>
                                     <td>
                                         <c:if test="${projectReview.projectPO.status==0}">
                                             待审核
@@ -141,18 +142,23 @@
                                             ${projectReview.message}
                                     </td>
                                     <td>
+                                        <%--如果该项目待审核中--%>
                                         <c:if test="${projectReview.projectPO.status==0}">
-                                            <a id="reviewA" href="project/to/review/project.html?projectId=${projectReview.projectPO.id}" class="btn btn-danger btn-xs"><i
+                                            <a id="reviewA"
+                                               href="project/to/get/project/detail.html?projectId=${projectReview.projectPO.id}&type=REVIEW_DETAIL_PROJECT_PAGE"
+                                               class="btn btn-danger btn-xs"><i
                                                     class="glyphicon glyphicon-search"></i>审核</a>
                                         </c:if>
+                                        <%--如果该项目审核不通过--%>
                                         <c:if test="${projectReview.projectPO.status==2}">
-                                            <a id="checkProjectA" class="btn btn-primary btn-xs"><i
+                                            <a id="checkProjectA" href="project/to/get/project/detail.html?projectId=${projectReview.projectPO.id}&type=DISREVIEW_DETAIL_PROJECT_PAGE" class="btn btn-primary btn-xs"><i
                                                     class="glyphicon glyphicon-search"></i>查看项目</a>
                                         </c:if>
                                     </td>
-                                </c:forEach>
-                            </c:if>
-                        </tr>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
+
                         </tbody>
                         <tfoot>
                         <tr>
@@ -162,7 +168,6 @@
                                 <div id="Searchresult" class="pagination"></div>
                             </td>
                         </tr>
-
                         </tfoot>
                     </table>
                 </div>

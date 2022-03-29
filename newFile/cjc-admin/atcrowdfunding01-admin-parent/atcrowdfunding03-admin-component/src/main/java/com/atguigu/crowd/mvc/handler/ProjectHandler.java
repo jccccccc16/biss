@@ -11,6 +11,7 @@ import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,9 +32,11 @@ public class ProjectHandler {
     private MemberService memberService;
     /**
      * 获取待审核的项目
+     *
      * @return
      */
 
+    @PreAuthorize("hasAuthority('project:get:review')")
     @RequestMapping("/get/project/to/be/review/page.html")
     public String getProjectTemp(
             ModelMap modelMap,
@@ -52,19 +55,25 @@ public class ProjectHandler {
      * @param modelMap
      * @return
      */
-    @RequestMapping("/to/review/project.html")
+    @RequestMapping("/to/get/project/detail.html")
     public String getReviewProjectDetail(
             @RequestParam("projectId")Integer projectId,
+            @RequestParam("type") String type,
             ModelMap modelMap
     ){
         ProjectDetailVO detailProjectVO = projectService.getDetailProjectVO(projectId);
         modelMap.addAttribute("detailProject",detailProjectVO);
+        // 设置访问类型，用于前端展示不同的页面
+        modelMap.addAttribute("type",type);
         return "project-detail";
     }
+
+
 
     /**
      * 审核通过
      */
+    @PreAuthorize("hasAuthority('project:do:review')")
     @RequestMapping("/do/review/project.html")
     public String doReview(
             @RequestParam("projectId") Integer projectId
@@ -76,6 +85,14 @@ public class ProjectHandler {
         return "projects-review";
     }
 
+    /**
+     * 审核不通过
+     * @param projectId
+     * @param message
+     * @param modelMap
+     * @return
+     */
+    @PreAuthorize("hasAuthority('project:do:review')")
     @RequestMapping("/do/disReview/project.html")
     public String doDisReview(
             @RequestParam("projectId") Integer projectId,
@@ -92,12 +109,13 @@ public class ProjectHandler {
 
 
     /**
-     * 获取除了0和2状态的项目
+     * 获取除了0和2状态的项目，用于展示项目管理
      * @param modelMap
      * @param pageSize
      * @param pageNum /project/to/get/projects/page.html
      * @return
      */
+    @PreAuthorize("hasAuthority('project:get')")
     @RequestMapping("/to/get/projects/page.html")
     public String toProjectPage(
             ModelMap modelMap,

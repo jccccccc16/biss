@@ -48,10 +48,12 @@ public class ProjectDetailVO {
 
     private Integer day;
 
+    private String message;
+
     public ProjectDetailVO() {
     }
 
-    public ProjectDetailVO(Integer projectId, String projectName, String projectDescription, Integer follower, Integer status, Integer money, Integer supportMoney, Integer percentage, String deployDate, Integer lastDay, Integer supporterCount, String headerPicturePath, List<String> detailPicturePathList, List<ReturnDetailVO> returnDetailVOList, Integer day) {
+    public ProjectDetailVO(String message ,Integer projectId, String projectName, String projectDescription, Integer follower, Integer status, Integer money, Integer supportMoney, Integer percentage, String deployDate, Integer lastDay, Integer supporterCount, String headerPicturePath, List<String> detailPicturePathList, List<ReturnDetailVO> returnDetailVOList, Integer day) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectDescription = projectDescription;
@@ -67,6 +69,7 @@ public class ProjectDetailVO {
         this.detailPicturePathList = detailPicturePathList;
         this.returnDetailVOList = returnDetailVOList;
         this.day = day;
+        this.message = message;
     }
 
     public Integer getProjectId() {
@@ -182,14 +185,20 @@ public class ProjectDetailVO {
     }
 
 
-
-
     public Integer getDay() {
         return day;
     }
 
     public void setDay(Integer day) {
         this.day = day;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
@@ -210,6 +219,7 @@ public class ProjectDetailVO {
                 ", detailPicturePathList=" + detailPicturePathList +
                 ", returnDetailVOList=" + returnDetailVOList +
                 ", day=" + day +
+                ", message='" + message + '\'' +
                 '}';
     }
 }

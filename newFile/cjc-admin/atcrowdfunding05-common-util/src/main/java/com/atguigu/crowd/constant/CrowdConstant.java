@@ -13,4 +13,6 @@ public class CrowdConstant {
 	public static final String ATTR_NAME_LOGIN_ADMIN = "loginAdmin";
 	public static final String ATTR_NAME_PAGE_INFO = "pageInfo";
 
+	public static final String MESSAGE_CAN_NOT_REMOVE_CURRENT_USER="不能删除当前用户";
+
 }

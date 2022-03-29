@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +30,14 @@ public class AssignHandler {
 	
 	@Autowired
 	private AuthService authService;
-	
+
+	/**
+	 * 为角色分配权限
+	 *
+	 * @param map
+	 * @return
+	 */
+	@PreAuthorize("hasAuthority('role:auth:distribution')")
 	@ResponseBody
 	@RequestMapping("/assign/do/role/assign/auth.json")
 	public ResultEntity<String> saveRoleAuthRelathinship(
@@ -58,7 +66,16 @@ public class AssignHandler {
 		
 		return ResultEntity.successWithData(authList);
 	}
-	
+
+	/**
+	 * 为用户分配角色
+	 * @param adminId
+	 * @param pageNum
+	 * @param keyword
+	 * @param roleIdList
+	 * @return
+	 */
+	@PreAuthorize("hasAuthority('role:distribution')")
 	@RequestMapping("/assign/do/role/assign.html")
 	public String saveAdminRoleRelationship(
 				@RequestParam("adminId") Integer adminId,

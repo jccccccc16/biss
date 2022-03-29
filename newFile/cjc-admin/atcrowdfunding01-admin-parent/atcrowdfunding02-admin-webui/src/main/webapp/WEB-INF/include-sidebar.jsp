@@ -53,7 +53,7 @@
 <%--        })--%>
 <%--    }--%>
 <%--</script>--%>
-
+<%--菜单页面从数据库动态生成--%>
 <div class="col-sm-3 col-md-2 sidebar">
     <div class="tree">
         <ul id="menusUl" style="padding-left:0px;" class="list-group">

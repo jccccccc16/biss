@@ -53,7 +53,7 @@
 					默认：运行时异常回滚
 					建议：编译时异常和运行时异常都回滚
 			 -->
-			<tx:method name="save*" propagation="REQUIRES_NEW" rollback-for="java.lang.Exception"/>
+			<tx:method name="save*"   propagation="REQUIRES_NEW" rollback-for="java.lang.Exception"/>
 			<tx:method name="update*" propagation="REQUIRES_NEW" rollback-for="java.lang.Exception"/>
 			<tx:method name="remove*" propagation="REQUIRES_NEW" rollback-for="java.lang.Exception"/>
 			<tx:method name="batch*" propagation="REQUIRES_NEW" rollback-for="java.lang.Exception"/>

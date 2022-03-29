@@ -8,11 +8,11 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">尚筹网系统弹窗</h4>
+				<h4 class="modal-title">众筹平台系统弹窗</h4>
 			</div>
 			<form>
 				<div class="modal-body">
-					您真的要删除<span id="removeNodeSpan"></span>这个节点吗？
+					确定要删除<span id="removeNodeSpan"></span>这个菜单吗？
 				</div>
 				<div class="modal-footer">
 					<button id="confirmBtn" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-ok"></i> OK</button>

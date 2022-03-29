@@ -5,7 +5,7 @@
   Date: 2020/9/20
   Time: 19:09
   To change this template use File | Settings | File Templates.
-  项目管理
+  项目管理，显示除了待审核和审核不通过的项目
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" isELIgnored="false" %>
 <html lang="zh-CN">
@@ -123,15 +123,17 @@
                                 <td colspan="6" align="center">抱歉，没有数据</td>
 
                             </c:if>
+                        </tr>
 
-                            <%--                            如果数据集不为空--%>
-                            <c:if test="${!empty requestScope.pageInfo.list}">
-                                <c:forEach items="${requestScope.pageInfo.list}" var="projectReview"
-                                           varStatus="myStatus">
+                        <%--                            如果数据集不为空--%>
+                        <c:if test="${!empty requestScope.pageInfo.list}">
+                            <c:forEach items="${requestScope.pageInfo.list}" var="projectReview"
+                                       varStatus="myStatus">
+                                <tr>
                                     <td>${myStatus.count}</td>
                                     <td>${projectReview.projectPO.projectName}</td>
                                     <td>${projectReview.loginAcct}</td>
-                                    <td>${projectReview.projectPO.createdate}</td>
+                                    <td>${projectReview.projectPO.deploydate}</td>
                                     <td>
                                         <c:if test="${projectReview.projectPO.status==1}">
                                             众筹中
@@ -155,7 +157,7 @@
                                     </td>
                                     <td>
                                         <c:if test="${projectReview.projectPO.status==1}">
-                                            <a id="checkProjectA" class="btn btn-primary btn-xs"><i
+                                            <a id="checkProjectA" href="project/to/get/project/detail.html?projectId=${projectReview.projectPO.id}&type=CHECK_DETAIL_PROJECT_PAGE" class="btn btn-primary btn-xs"><i
                                                     class="glyphicon glyphicon-search"></i>查看项目</a>
                                         </c:if>
                                         <c:if test="${projectReview.projectPO.status==3}">
@@ -175,8 +177,9 @@
                                                     class="glyphicon glyphicon-search"></i>查看账单</a>
                                         </c:if>
                                     </td>
-                                </c:forEach>
-                            </c:if>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
                         </tr>
                         </tbody>
                         <tfoot>

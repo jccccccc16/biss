@@ -16,13 +16,21 @@ import com.atguigu.crowd.service.api.RoleService;
 import com.atguigu.crowd.util.ResultEntity;
 import com.github.pagehelper.PageInfo;
 
+/**
+ * 角色控制器
+ */
 @RestController
 public class RoleHandler {
 	
 	@Autowired
 	private RoleService roleService;
-	
-	// @ResponseBody
+
+	/**
+	 * 删除角色
+	 * @param roleIdList
+	 * @return
+	 */
+	@PreAuthorize("hasAuthority('role:delete')")
 	@RequestMapping("/role/remove/by/role/id/array.json")
 	public ResultEntity<String> removeByRoleIdAarry(@RequestBody List<Integer> roleIdList) {
 		
@@ -30,8 +38,14 @@ public class RoleHandler {
 		
 		return ResultEntity.successWithoutData();
 	}
-	
-	// @ResponseBody
+
+	/**
+	 * 更新角色
+	 *
+	 * @param role
+	 * @return
+	 */
+	@PreAuthorize("hasAuthority('role:udpate')")
 	@RequestMapping("/role/update.json")
 	public ResultEntity<String> updateRole(Role role) {
 		
@@ -39,8 +53,14 @@ public class RoleHandler {
 		
 		return ResultEntity.successWithoutData();
 	}
-	
-	// @ResponseBody
+
+	/**
+	 * 新增角色
+	 *
+	 * @param role
+	 * @return
+	 */
+	@PreAuthorize("hasAuthority('role:add')")
 	@RequestMapping("/role/save.json")
 	public ResultEntity<String> saveRole(Role role) {
 		
@@ -48,9 +68,16 @@ public class RoleHandler {
 		
 		return ResultEntity.successWithoutData();
 	}
-	
-	@PreAuthorize("hasAnyRole('jl','admin')")
-	// @ResponseBody
+
+	/**
+	 * 获取角色页面
+	 *
+	 * @param pageNum
+	 * @param pageSize
+	 * @param keyword
+	 * @return
+	 */
+	@PreAuthorize("hasAuthority('role:get')")
 	@RequestMapping("/role/get/page/info.json")
 	public ResultEntity<PageInfo<Role>> getPageInfo(
 				@RequestParam(value="pageNum", defaultValue="1") Integer pageNum,

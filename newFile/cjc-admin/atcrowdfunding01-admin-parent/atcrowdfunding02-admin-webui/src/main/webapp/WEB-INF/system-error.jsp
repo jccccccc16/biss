@@ -41,7 +41,7 @@
 	<div class="container">
 	
 		<h2 class="form-signin-heading" style="text-align: center;">
-			<i class="glyphicon glyphicon-log-in"></i> 众筹平台系统消息
+			 众筹平台系统消息提示
 		</h2>
 		<!-- 
 			requestScope对应的是存放request域数据的Map
@@ -49,7 +49,7 @@
 			requestScope.exception.message相当于exception.getMessage()
 		 -->
 		<h3 style="text-align: center;">${requestScope.exception.message }</h3>
-		<button style="width: 150px;margin: 50px auto 0px auto;" class="btn btn-lg btn-success btn-block">点我返回首页</button>
+		<a href="admin/to/main/page.html" style="width: 150px;margin: 50px auto 0px auto;" class="btn btn-lg btn-primary btn-block">点我返回首页</a>
 	</div>
 </body>
 </html>

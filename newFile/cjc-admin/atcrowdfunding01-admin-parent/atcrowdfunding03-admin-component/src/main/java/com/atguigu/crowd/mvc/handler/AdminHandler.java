@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.atguigu.crowd.exception.CanNotRemoveCurrentUser;
+import com.atguigu.crowd.mvc.config.SecurityAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +30,15 @@ public class AdminHandler {
 	
 	@Autowired
 	private AdminService adminService;
-	
+
+	/**
+	 * 更新
+	 * @param admin
+	 * @param pageNum
+	 * @param keyword
+	 * @return
+	 */
+	@PreAuthorize("hasAuthority('user:update')")
 	@RequestMapping("/admin/update.html")
 	public String update(Admin admin, @RequestParam("pageNum") Integer pageNum, @RequestParam("keyword") String keyword) {
 		
@@ -35,7 +46,14 @@ public class AdminHandler {
 		
 		return "redirect:/admin/get/page.html?pageNum="+pageNum+"&keyword="+keyword;
 	}
-	
+
+	/**
+	 * 跳转到更新页面
+	 * @param adminId
+	 * @param modelMap
+	 * @return
+	 */
+
 	@RequestMapping("/admin/to/edit/page.html")
 	public String toEditPage(
 				@RequestParam("adminId") Integer adminId,
@@ -50,8 +68,14 @@ public class AdminHandler {
 		
 		return "admin-edit";
 	}
-	
-	@PreAuthorize("hasAuthority('user:save')")
+
+	/**
+	 * 新增用户
+	 * @param admin
+	 * @return
+	 */
+
+	@PreAuthorize("hasAuthority('user:add')")
 	@RequestMapping("/admin/save.html")
 	public String save(Admin admin) {
 		
@@ -59,31 +83,60 @@ public class AdminHandler {
 		
 		return "redirect:/admin/get/page.html?pageNum="+Integer.MAX_VALUE;
 	}
-	
+
+	/**
+	 * 删除用户
+     *
+	 * @param adminId
+	 * @param pageNum
+	 * @param keyword
+	 * @return
+	 */
+	@PreAuthorize("hasAuthority('user:delete')")
 	@RequestMapping("/admin/remove/{adminId}/{pageNum}/{keyword}.html")
 	public String remove(
 				@PathVariable("adminId") Integer adminId,
 				@PathVariable("pageNum") Integer pageNum,
 				@PathVariable("keyword") String keyword
 			) {
-		
+
+        Admin admin = adminService.getAdminById(adminId);
+        // 是否为当前用户
+        if(isCurrentUser(admin.getLoginAcct())){
+            // 如果是
+            throw new CanNotRemoveCurrentUser(CrowdConstant.MESSAGE_CAN_NOT_REMOVE_CURRENT_USER);
+        }
 		// 执行删除
 		adminService.remove(adminId);
-		
-		// 页面跳转：回到分页页面
-		
-		// 尝试方案1：直接转发到admin-page.jsp会无法显示分页数据
-		// return "admin-page";
-		
-		// 尝试方案2：转发到/admin/get/page.html地址，一旦刷新页面会重复执行删除浪费性能
-		// return "forward:/admin/get/page.html";
-		
-		// 尝试方案3：重定向到/admin/get/page.html地址
-		// 同时为了保持原本所在的页面和查询关键词再附加pageNum和keyword两个请求参数
+
 		return "redirect:/admin/get/page.html?pageNum="+pageNum+"&keyword="+keyword;
 	}
 
-	@PreAuthorize("hasRole('经理') or hasAuthority('user:get')")
+	/**
+	 * 是否为当前用户
+     *
+	 * @param loginAcct
+	 * @return
+	 */
+	private  boolean isCurrentUser(String loginAcct){
+        SecurityAdmin securityAdmin = (SecurityAdmin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String loginAcctSource = securityAdmin.getOriginalAdmin().getLoginAcct();
+        if(loginAcctSource.equals(loginAcct)){
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 *  用户列表
+	 * @param keyword
+	 * @param pageNum
+	 * @param pageSize
+	 * @param modelMap
+	 * @return
+	 */
+
+    @PreAuthorize("hasAuthority('user:get')")
 	@RequestMapping("/admin/get/page.html")
 	public String getPageInfo(
 				
@@ -118,7 +171,14 @@ public class AdminHandler {
 		
 		return "redirect:/admin/to/login/page.html";
 	}
-	
+
+	/**
+	 * 废弃，交由spring security管理
+	 * @param loginAcct
+	 * @param userPswd
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/admin/do/login.html")
 	public String doLogin(
 				@RequestParam("loginAcct") String loginAcct,
@@ -136,22 +196,12 @@ public class AdminHandler {
 		return "redirect:/admin/to/main/page.html";
 	}
 	
-//	@ResponseBody
-//	@PostAuthorize("returnObject.data.loginAcct == principal.username")
-//	@RequestMapping("/admin/test/post/filter.json")
-//	public ResultEntity<Admin> getAdminById() {
-//
-//		Admin admin = new Admin();
-//
-//		admin.setLoginAcct("adminOperator");
-//
-//		return ResultEntity.successWithData(admin);
-//	}
 
-	@ResponseBody
-	@RequestMapping("/admin/test/pre/filter")
-	public ResultEntity<List<Integer>> saveList(@RequestBody List<Integer> valueList) {
-		return ResultEntity.successWithData(valueList);
-	}
+//
+//	@ResponseBody
+//	@RequestMapping("/admin/test/pre/filter")
+//	public ResultEntity<List<Integer>> saveList(@RequestBody List<Integer> valueList) {
+//		return ResultEntity.successWithData(valueList);
+//	}
 
 }

@@ -6,6 +6,7 @@ import com.atguigu.crowd.entity.*;
 import com.atguigu.crowd.mapper.ProjectPOMapper;
 import com.atguigu.crowd.service.api.MemberService;
 import com.atguigu.crowd.service.api.ProjectService;
+import com.atguigu.crowd.util.CrowdUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -55,7 +56,8 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectDetailVO getDetailProjectVO(Integer id) {
 
         ProjectDetailVO projectDetailVO = projectPOMapper.selectDetailProjectVO(id);
-
+        // 设置剩余天数
+        projectDetailVO.setLastDay(CrowdUtil.getDateSub(projectDetailVO.getDay(),projectDetailVO.getDeployDate()));
         return projectDetailVO;
     }
 

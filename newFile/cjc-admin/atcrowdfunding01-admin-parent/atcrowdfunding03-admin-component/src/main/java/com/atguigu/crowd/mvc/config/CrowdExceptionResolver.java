@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,6 +22,11 @@ import com.google.gson.Gson;
 // @ControllerAdvice表示当前类是一个基于注解的异常处理器类
 @ControllerAdvice
 public class CrowdExceptionResolver {
+
+
+
+
+
 	
 	@ExceptionHandler(value = LoginAcctAlreadyInUseForUpdateException.class)
 	public ModelAndView resolveLoginAcctAlreadyInUseForUpdateException(
@@ -44,18 +51,22 @@ public class CrowdExceptionResolver {
 		
 		return commonResolve(viewName, exception, request, response);
 	}
+
+
 	
-	@ExceptionHandler(value = LoginFailedException.class)
-	public ModelAndView resolveLoginFailedException(
-			LoginFailedException exception,
-			HttpServletRequest request,
-			HttpServletResponse response
-			) throws IOException {
-		
-		String viewName = "admin-login";
-		
-		return commonResolve(viewName, exception, request, response);
-	}
+//	@ExceptionHandler(value = LoginFailedException.class)
+//	public ModelAndView resolveLoginFailedException(
+//			LoginFailedException exception,
+//			HttpServletRequest request,
+//			HttpServletResponse response
+//			) throws IOException {
+//
+//		String viewName = "admin-login";
+//
+//		return commonResolve(viewName, exception, request, response);
+//	}
+
+
 	
 	@ExceptionHandler(value = Exception.class)
 	public ModelAndView resolveException(
@@ -68,6 +79,8 @@ public class CrowdExceptionResolver {
 		
 		return commonResolve(viewName, exception, request, response);
 	}
+
+
 	
 	// @ExceptionHandler将一个具体的异常类型和一个方法关联起来
 	private ModelAndView commonResolve(

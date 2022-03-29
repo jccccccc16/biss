@@ -45,8 +45,7 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private Mp5PassEncoder passwordEncoder;
 
-	@Autowired
-	private MenuGenerateInterceptor menuGenerateInterceptor;
+
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder builder) throws Exception {
@@ -58,8 +57,6 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 		builder
 			.userDetailsService(userDetailsService)
 			.passwordEncoder(passwordEncoder);
-
-		
 	}
 	
 	@Override
@@ -87,6 +84,8 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 			.permitAll()                    // 针对静态资源进行设置，无条件访问
 			.antMatchers("/ztree/**")       // 针对静态资源进行设置，无条件访问
 			.permitAll()
+				.antMatchers("/role/to/page.html")
+				.hasAnyAuthority("role:get")
 				// 针对分页显示Admin数据设定访问控制
 			// .hasRole("经理")					// 要求具备经理角色
 			// 要求具备“经理”角色和“user:get”权限二者之一
@@ -106,7 +105,8 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.csrf()							// 防跨站请求伪造功能
 			.disable()						// 禁用
-			.formLogin()					// 开启表单登录的功能
+			.formLogin()// 开启表单登录的功能
+				.failureHandler()
 			.loginPage("/admin/to/login/page.html")	// 指定登录页面
 			.loginProcessingUrl("/security/do/login.html")	// 指定处理登录请求的地址
 			.defaultSuccessUrl("/admin/to/main/page.html")	// 指定登录成功后前往的地址

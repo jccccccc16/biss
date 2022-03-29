@@ -8,12 +8,14 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">尚筹网系统弹窗</h4>
+				<h4 class="modal-title">众筹平台系统弹窗</h4>
 			</div>
 			<form>
 				<div class="modal-body">
 					请输入节点名称：<input type="text" name="name" /><br />
 					请输入URL地址：<input type="text" name="url" /><br />
+					<i>无</i>
+					<input type="radio" name="icon" value=" " />&nbsp;
 					<i class="glyphicon glyphicon-th-list"></i>
 					<input type="radio" name="icon" value="glyphicon glyphicon-th-list" />&nbsp;
 					

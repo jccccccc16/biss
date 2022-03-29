@@ -47,10 +47,9 @@ public class CrowdUserDetailsService implements UserDetailsService {
 		// 5.创建集合对象用来存储GrantedAuthority
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		
-		// 6.遍历assignedRoleList存入角色信息
+		// 6.角色
 		for (Role role : assignedRoleList) {
-			
-			// 注意：不要忘了加前缀！
+
 			String roleName = "ROLE_" + role.getName();
 			
 			SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(roleName);
@@ -58,7 +57,7 @@ public class CrowdUserDetailsService implements UserDetailsService {
 			authorities.add(simpleGrantedAuthority);
 		}
 		
-		// 7.遍历authNameList存入权限信息
+		// 7.权限
 		for (String authName : authNameList) {
 			
 			SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authName);

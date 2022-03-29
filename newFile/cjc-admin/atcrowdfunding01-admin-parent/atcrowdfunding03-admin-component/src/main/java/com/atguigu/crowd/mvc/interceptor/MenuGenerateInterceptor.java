@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * 菜单拦截器，旨在每次浏览页面都动态生成菜单
+ */
 @Component
 public class MenuGenerateInterceptor extends HandlerInterceptorAdapter {
 
@@ -39,13 +42,13 @@ public class MenuGenerateInterceptor extends HandlerInterceptorAdapter {
             Map<Integer, List<Menu>> collect = allMenus.stream().collect(Collectors.groupingBy(Menu::getPid));
             // 获取二级菜单
             List<Menu> menusFromMysql = collect.get(1);
-            List<Menu> resultMenu = new ArrayList<>();
+            List<Menu> resultMenuList = new ArrayList<>();
             for (Menu menu : menusFromMysql) {
                 List<Menu> childrenNode = collect.get(menu.getId()); // 获取二级菜单的孩子节点
                 menu.setChildren(childrenNode);
-                resultMenu.add(menu);
+                resultMenuList.add(menu);
             }
-            session.setAttribute("menus",resultMenu);
+            session.setAttribute("menus",resultMenuList);
 //        }
     }
 }
