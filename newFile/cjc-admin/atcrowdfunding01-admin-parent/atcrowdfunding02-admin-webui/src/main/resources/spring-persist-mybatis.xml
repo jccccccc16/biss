@@ -48,7 +48,7 @@
 	
 	<!-- 配置MapperScannerConfigurer来扫描Mapper接口所在的包 -->
 	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.atguigu.crowd.mapper"/>
+		<property name="basePackage" value="com.atguigu.crowd.mapper,com.atguigu.crowd.monitor.mapper"/>
 	</bean>
 
 </beans>

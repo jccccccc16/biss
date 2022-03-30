@@ -2,6 +2,7 @@ package com.atguigu.crowd.mvc.handler;
 
 import java.util.List;
 
+import com.atguigu.crowd.monitor.annotation.BusinessType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 // import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ public class RoleHandler {
 	 * @param roleIdList
 	 * @return
 	 */
+	@BusinessType("删除角色")
 	@PreAuthorize("hasAuthority('role:delete')")
 	@RequestMapping("/role/remove/by/role/id/array.json")
 	public ResultEntity<String> removeByRoleIdAarry(@RequestBody List<Integer> roleIdList) {
@@ -45,6 +47,7 @@ public class RoleHandler {
 	 * @param role
 	 * @return
 	 */
+	@BusinessType("更新角色")
 	@PreAuthorize("hasAuthority('role:udpate')")
 	@RequestMapping("/role/update.json")
 	public ResultEntity<String> updateRole(Role role) {
@@ -60,6 +63,7 @@ public class RoleHandler {
 	 * @param role
 	 * @return
 	 */
+	@BusinessType("新增角色")
 	@PreAuthorize("hasAuthority('role:add')")
 	@RequestMapping("/role/save.json")
 	public ResultEntity<String> saveRole(Role role) {
@@ -77,6 +81,7 @@ public class RoleHandler {
 	 * @param keyword
 	 * @return
 	 */
+
 	@PreAuthorize("hasAuthority('role:get')")
 	@RequestMapping("/role/get/page/info.json")
 	public ResultEntity<PageInfo<Role>> getPageInfo(

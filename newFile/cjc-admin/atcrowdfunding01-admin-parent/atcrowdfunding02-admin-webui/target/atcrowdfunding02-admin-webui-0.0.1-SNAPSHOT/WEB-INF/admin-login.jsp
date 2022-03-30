@@ -39,6 +39,7 @@
 			</h2>
 			<%-- 显示错误信息--%>
 			<p>${requestScope.exception.message }</p>
+			<p>${sessionScope.message }</p>
 			<%--显示spring scurity的错误信息--%>
 			<p>${SPRING_SECURITY_LAST_EXCEPTION.message }</p>
 			<div class="form-group has-success has-feedback">

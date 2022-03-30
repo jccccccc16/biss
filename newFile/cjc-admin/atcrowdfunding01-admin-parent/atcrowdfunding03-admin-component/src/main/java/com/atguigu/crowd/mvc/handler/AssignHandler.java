@@ -3,6 +3,7 @@ package com.atguigu.crowd.mvc.handler;
 import java.util.List;
 import java.util.Map;
 
+import com.atguigu.crowd.monitor.annotation.BusinessType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ public class AssignHandler {
 	 * @param map
 	 * @return
 	 */
+	@BusinessType("分配角色权限")
 	@PreAuthorize("hasAuthority('role:auth:distribution')")
 	@ResponseBody
 	@RequestMapping("/assign/do/role/assign/auth.json")
@@ -75,6 +77,7 @@ public class AssignHandler {
 	 * @param roleIdList
 	 * @return
 	 */
+	@BusinessType("分配用户权限")
 	@PreAuthorize("hasAuthority('role:distribution')")
 	@RequestMapping("/assign/do/role/assign.html")
 	public String saveAdminRoleRelationship(

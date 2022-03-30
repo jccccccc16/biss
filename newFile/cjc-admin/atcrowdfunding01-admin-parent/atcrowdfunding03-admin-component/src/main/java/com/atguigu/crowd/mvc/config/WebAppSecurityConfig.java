@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.atguigu.crowd.mvc.interceptor.MenuGenerateInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -26,13 +28,19 @@ import com.atguigu.crowd.constant.CrowdConstant;
 
 // 启用Web环境下权限控制功能
 @EnableWebSecurity
-
+// 设置order为1，后于日志记录系统进行
 // 启用全局方法权限控制功能，并且设置prePostEnabled = true。保证@PreAuthority、@PostAuthority、@PreFilter、@PostFilter生效
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true,order = 1)
 public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
+
+	@Autowired
+	private CrowdAuthenticationSuccessHandler authenticationSuccessHandler;
+
+	@Autowired
+	private CrowdAuthenticationFailureHandler authenticationFailureHandler;
 	
 	/*
 	 * 
@@ -45,6 +53,13 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private Mp5PassEncoder passwordEncoder;
 
+
+	@Bean
+	public ReloadableResourceBundleMessageSource messageSource(){
+		ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
+		reloadableResourceBundleMessageSource.setBasename("classpath:messages");
+		return reloadableResourceBundleMessageSource;
+	}
 
 	
 	@Override
@@ -106,12 +121,13 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf()							// 防跨站请求伪造功能
 			.disable()						// 禁用
 			.formLogin()// 开启表单登录的功能
-				.failureHandler()
 			.loginPage("/admin/to/login/page.html")	// 指定登录页面
 			.loginProcessingUrl("/security/do/login.html")	// 指定处理登录请求的地址
 			.defaultSuccessUrl("/admin/to/main/page.html")	// 指定登录成功后前往的地址
 			.usernameParameter("loginAcct")	// 账号的请求参数名称
 			.passwordParameter("userPswd")	// 密码的请求参数名称
+				.successHandler(authenticationSuccessHandler)
+				.failureHandler(authenticationFailureHandler)
 			.and()
 			.logout()						// 开启退出登录功能
 			.logoutUrl("/seucrity/do/logout.html")			// 指定退出登录地址

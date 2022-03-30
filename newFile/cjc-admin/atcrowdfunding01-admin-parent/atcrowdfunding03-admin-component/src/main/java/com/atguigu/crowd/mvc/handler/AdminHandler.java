@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.atguigu.crowd.exception.CanNotRemoveCurrentUser;
+import com.atguigu.crowd.monitor.annotation.BusinessType;
 import com.atguigu.crowd.mvc.config.SecurityAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -38,6 +39,7 @@ public class AdminHandler {
 	 * @param keyword
 	 * @return
 	 */
+	@BusinessType("更新用户")
 	@PreAuthorize("hasAuthority('user:update')")
 	@RequestMapping("/admin/update.html")
 	public String update(Admin admin, @RequestParam("pageNum") Integer pageNum, @RequestParam("keyword") String keyword) {
@@ -74,7 +76,7 @@ public class AdminHandler {
 	 * @param admin
 	 * @return
 	 */
-
+	@BusinessType("新增用户")
 	@PreAuthorize("hasAuthority('user:add')")
 	@RequestMapping("/admin/save.html")
 	public String save(Admin admin) {
@@ -92,6 +94,7 @@ public class AdminHandler {
 	 * @param keyword
 	 * @return
 	 */
+	@BusinessType("删除用户")
 	@PreAuthorize("hasAuthority('user:delete')")
 	@RequestMapping("/admin/remove/{adminId}/{pageNum}/{keyword}.html")
 	public String remove(
@@ -118,6 +121,7 @@ public class AdminHandler {
 	 * @param loginAcct
 	 * @return
 	 */
+
 	private  boolean isCurrentUser(String loginAcct){
         SecurityAdmin securityAdmin = (SecurityAdmin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String loginAcctSource = securityAdmin.getOriginalAdmin().getLoginAcct();
@@ -135,7 +139,7 @@ public class AdminHandler {
 	 * @param modelMap
 	 * @return
 	 */
-
+	@BusinessType("查看用户")
     @PreAuthorize("hasAuthority('user:get')")
 	@RequestMapping("/admin/get/page.html")
 	public String getPageInfo(

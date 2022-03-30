@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import com.atguigu.crowd.monitor.annotation.BusinessType;
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.stereotype.Controller;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,8 +24,13 @@ public class MenuHandler {
 	
 	@Autowired
 	private MenuService menuService;
-	
 
+	/**
+	 * 删除菜单
+	 * @param id
+	 * @return
+	 */
+	@BusinessType("删除菜单")
 	@PreAuthorize("hasAuthority('menu:remove')")
 	@RequestMapping("/menu/remove.json")
 	public ResultEntity<String> removeMenu(@RequestParam("id") Integer id) {
@@ -35,7 +41,7 @@ public class MenuHandler {
 	}
 
 
-
+	@BusinessType("更新菜单")
 	@PreAuthorize("hasAuthority('menu:update')")
 	@RequestMapping("/menu/update.json")
 	public ResultEntity<String> updateMenu(Menu menu) {
@@ -44,7 +50,7 @@ public class MenuHandler {
 		
 		return ResultEntity.successWithoutData();
 	}
-	
+	@BusinessType("新增菜单")
 	@PreAuthorize("hasAuthority('menu:add')")
 	@RequestMapping("/menu/save.json")
 	public ResultEntity<String> saveMenu(Menu menu) {

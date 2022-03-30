@@ -36,9 +36,10 @@
 		<form action="security/do/login.html" method="post" class="form-signin" role="form">
 			<h2 class="form-signin-heading">
 				众筹平台管理员登录
-			</h2>e
+			</h2>
 			<%-- 显示错误信息--%>
 			<p>${requestScope.exception.message }</p>
+			<p>${sessionScope.message }</p>
 			<%--显示spring scurity的错误信息--%>
 			<p>${SPRING_SECURITY_LAST_EXCEPTION.message }</p>
 			<div class="form-group has-success has-feedback">

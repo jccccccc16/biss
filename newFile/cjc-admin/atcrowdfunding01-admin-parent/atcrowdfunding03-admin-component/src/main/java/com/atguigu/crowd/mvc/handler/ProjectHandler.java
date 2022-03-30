@@ -4,6 +4,7 @@ import com.atguigu.crowd.entity.MemberPO;
 import com.atguigu.crowd.entity.ProjectDetailVO;
 import com.atguigu.crowd.entity.ProjectPO;
 import com.atguigu.crowd.entity.ProjectReview;
+import com.atguigu.crowd.monitor.annotation.BusinessType;
 import com.atguigu.crowd.service.api.MemberService;
 import com.atguigu.crowd.service.api.ProjectService;
 
@@ -35,7 +36,7 @@ public class ProjectHandler {
      *
      * @return
      */
-
+    @BusinessType("获取待审核的项目")
     @PreAuthorize("hasAuthority('project:get:review')")
     @RequestMapping("/get/project/to/be/review/page.html")
     public String getProjectTemp(
@@ -55,6 +56,7 @@ public class ProjectHandler {
      * @param modelMap
      * @return
      */
+    @BusinessType("获取审核项目详情")
     @RequestMapping("/to/get/project/detail.html")
     public String getReviewProjectDetail(
             @RequestParam("projectId")Integer projectId,
@@ -73,6 +75,7 @@ public class ProjectHandler {
     /**
      * 审核通过
      */
+    @BusinessType("审核通过项目")
     @PreAuthorize("hasAuthority('project:do:review')")
     @RequestMapping("/do/review/project.html")
     public String doReview(
@@ -92,6 +95,7 @@ public class ProjectHandler {
      * @param modelMap
      * @return
      */
+    @BusinessType("审核不通过项目")
     @PreAuthorize("hasAuthority('project:do:review')")
     @RequestMapping("/do/disReview/project.html")
     public String doDisReview(
@@ -115,6 +119,7 @@ public class ProjectHandler {
      * @param pageNum /project/to/get/projects/page.html
      * @return
      */
+    @BusinessType("查看项目管理")
     @PreAuthorize("hasAuthority('project:get')")
     @RequestMapping("/to/get/projects/page.html")
     public String toProjectPage(
