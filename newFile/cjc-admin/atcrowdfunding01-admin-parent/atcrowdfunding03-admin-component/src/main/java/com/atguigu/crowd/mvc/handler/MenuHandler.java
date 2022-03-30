@@ -62,7 +62,6 @@ public class MenuHandler {
 		return ResultEntity.successWithoutData();
 	}
 
-	@PreAuthorize("hasAuthority('menu:get')")
 	@RequestMapping("/menu/get/whole/tree.json")
 	public ResultEntity<Menu> getWholeTreeNew() {
 		

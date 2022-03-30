@@ -103,6 +103,8 @@
 		<id column="id" property="projectPO.id" jdbcType="INTEGER" />
 		<result column="project_name" property="projectPO.projectName"
 				jdbcType="VARCHAR" />
+		<result column="review_admin" property="reviewAdmin"
+				jdbcType="VARCHAR" />
 		<result column="project_description"
 				property="projectPO.projectDescription" jdbcType="VARCHAR" />
 		<result column="money" property="projectPO.money" jdbcType="BIGINT" />
@@ -126,6 +128,14 @@
 				property="projectPO.headerPicturePath" jdbcType="VARCHAR" />
 		<result column="message"
 				property="projectPO.message" jdbcType="VARCHAR" />
+		<result column="remark"
+				property="remark" jdbcType="VARCHAR" />
+		<result column="review_admin_login_acct"
+				property="reviewAdmin" jdbcType="VARCHAR" />
+		<result column="project_status"
+				property="projectStatus" jdbcType="VARCHAR" />
+		<result column="completion" property="projectPO.completion"
+				jdbcType="INTEGER" />
 	</resultMap>
 	<resultMap id="BaseResultMap"
 		type="com.atguigu.crowd.entity.ProjectPO">
@@ -153,6 +163,10 @@
 			jdbcType="INTEGER" />
 		<result column="header_picture_path"
 			property="headerPicturePath" jdbcType="VARCHAR" />
+		<result column="review_date"
+				property="reviewDate" jdbcType="VARCHAR" />
+		<result column="remark"
+				property="remark" jdbcType="VARCHAR" />
 		<result column="message"
 				property="message" jdbcType="VARCHAR" />
 	</resultMap>
@@ -227,7 +241,12 @@
 	</sql>
 
 	<select id="selectProjectReviews" resultMap="projectReview">
-		SELECT p.*,m.loginacct FROM t_project p  LEFT JOIN t_member m ON p.memberid = m.id WHERE p.status = 0 or p.status=2
+SELECT p.*,rpa.remark,a.login_acct review_admin_login_acct, rpa.project_status project_status, rpa.create_date review_date ,m.loginacct member_login_acct FROM t_project p
+LEFT JOIN t_member m ON p.memberid = m.id
+LEFT JOIN t_review_project_admin rpa ON p.id =  rpa.project_id
+LEFT JOIN t_admin a ON a.id  = rpa.admin_id
+WHERE rpa.project_status = 0 OR rpa.project_status=2
+
 	</select>
 	<select id="selectByExample" resultMap="BaseResultMap"
 		parameterType="com.atguigu.crowd.entity.ProjectPOExample">
@@ -266,6 +285,12 @@
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
+
+	<insert id="insertReviewProjectAdmin">
+		insert into t_review_project_admin(admin_id,project_id,remark,create_date)
+		values(#{adminId},#{projectId},#{remark},#{create_date})
+	</insert>
+
 	<!-- void insertTypeRelationship( @Param("typeIdList") List<Integer> typeIdList, 
 		@Param("projectId") Integer projectId); -->
 	<insert id="insertTypeRelationship">

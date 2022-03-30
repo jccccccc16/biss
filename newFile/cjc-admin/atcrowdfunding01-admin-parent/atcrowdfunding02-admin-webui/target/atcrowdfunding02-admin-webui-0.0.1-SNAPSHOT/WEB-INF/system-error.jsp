@@ -20,7 +20,7 @@
 	$(function(){
 		$("button").click(function(){
 			// 相当于浏览器的后退按钮
-			window.location.href("http://${pageContext.request.serverName }:${pageContext.request.serverPort }${pageContext.request.contextPath }/")
+			window.history.back(-1);
 		});
 	});
 </script>
@@ -49,7 +49,7 @@
 			requestScope.exception.message相当于exception.getMessage()
 		 -->
 		<h3 style="text-align: center;">${requestScope.exception.message }</h3>
-		<a href="admin/to/main/page.html" style="width: 150px;margin: 50px auto 0px auto;" class="btn btn-lg btn-primary btn-block">点我返回首页</a>
+		<a href="admin/to/main/page.html" style="width: 150px;margin: 50px auto 0px auto;" class="btn btn-lg btn-primary btn-block">返回上一步</a>
 	</div>
 </body>
 </html>

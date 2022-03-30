@@ -11,6 +11,14 @@ public class ProjectReview implements Serializable {
     // 项目发起人
     private String loginAcct;
 
+    private String reviewAdmin;
+
+    private String reviewDate;
+
+    private String remark;
+
+    private String projectStatus;
+
     public ProjectReview() {
     }
 
@@ -20,10 +28,47 @@ public class ProjectReview implements Serializable {
         this.loginAcct = loginAcct;
     }
 
+    /**
+     * 用于创建没有错误信息的project
+     * @param projectPO
+     * @param loginAcct
+     */
     public ProjectReview(ProjectPO projectPO, String loginAcct) {
         this.projectPO = projectPO;
         this.loginAcct = loginAcct;
         this.message = "";
+    }
+
+
+    public ProjectReview(ProjectPO projectPO, String message, String loginAcct, String reviewAdmin) {
+        this.projectPO = projectPO;
+        this.message = message;
+        this.loginAcct = loginAcct;
+        this.reviewAdmin = reviewAdmin;
+    }
+
+    public String getProjectStatus() {
+        return projectStatus;
+    }
+
+    public void setProjectStatus(String projectStatus) {
+        this.projectStatus = projectStatus;
+    }
+
+    public String getReviewDate() {
+        return reviewDate;
+    }
+
+    public void setReviewDate(String reviewDate) {
+        this.reviewDate = reviewDate;
+    }
+
+    public String getReviewAdmin() {
+        return reviewAdmin;
+    }
+
+    public void setReviewAdmin(String reviewAdmin) {
+        this.reviewAdmin = reviewAdmin;
     }
 
     public ProjectPO getProjectPO() {
@@ -52,6 +97,13 @@ public class ProjectReview implements Serializable {
         this.loginAcct = loginAcct;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     @Override
     public String toString() {

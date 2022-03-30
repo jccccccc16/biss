@@ -56,8 +56,11 @@ public class CrowdAuthenticationFailureHandler implements AuthenticationFailureH
         operLog.setCreateTime(CrowdUtil.getNow(CrowdConstant.DATE_PATTERN));
         operLogService.saveOperLog(operLog);
         logger.info("操作者：" + operLog.getOperName() + ",业务类型：" + operLog.getBusinessType() + ",访问：" + operLog.getStatus() +",ip："+operLog.getOperIp()+",访问时间：" + operLog.getCreateTime());
-        // 抛出异常，让springsecurity处理
+
+        String loginAcct = request.getParameter("loginAcct");
         request.getSession().setAttribute("message","账号或密码错误");
+        request.getSession().setAttribute("loginAcct",loginAcct);
+
         response.sendRedirect("http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/admin/to/login/page.html");
     }
 }

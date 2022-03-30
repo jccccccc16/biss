@@ -48,8 +48,7 @@ public class OperLogAspect {
     private boolean isLogin = true;
     private Logger logger = LoggerFactory.getLogger(OperLogAspect.class);
 
-    // 保存proceed方法中抛出的异常
-    private Throwable throwable;
+
 
     public static final String SUCCESS = "请求成功";
     public static final String FAILED = "请求失败";
@@ -86,6 +85,7 @@ public class OperLogAspect {
 //            return returnValue;
 
         Object returnValue = null;
+        Throwable currentThrowable=null;
         try {
             // 前置通知
             beforeMethod(joinPoint);
@@ -93,18 +93,18 @@ public class OperLogAspect {
             returnValue = joinPoint.proceed();
             // 后置通知
             afterMethod(joinPoint);
+            Throwable throwable;
         } catch (Throwable throwable) {
-            throwable.printStackTrace();
             logger.error(throwable.getMessage());
             afterThrowingMethod(joinPoint, throwable);
-            this.throwable = throwable;
+            currentThrowable = throwable;
         }finally {
             // 插入日志
             operLogService.saveOperLog(operLog);
             logger.info("操作者：" + operLog.getOperName() + ",业务类型：" + operLog.getBusinessType() + ",访问：" + operLog.getStatus() +",ip："+operLog.getOperIp()+",访问时间：" + operLog.getCreateTime());
             // 如果出现异常被捕获的情况，在这里抛出异常，交给全局异常处理器捕获处理
-            if(this.throwable!=null){
-                throw throwable;
+            if(currentThrowable!=null){
+                throw currentThrowable;
             }
             // 插入日志
             return returnValue;
@@ -143,7 +143,6 @@ public class OperLogAspect {
      *
      * @param joinPoint
      */
-
     public void afterMethod(ProceedingJoinPoint joinPoint) {
         afterMethod0(joinPoint,null);
     }

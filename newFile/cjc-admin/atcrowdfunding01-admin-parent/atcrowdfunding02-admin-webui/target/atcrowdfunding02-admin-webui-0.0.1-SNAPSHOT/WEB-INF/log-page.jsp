@@ -45,8 +45,8 @@
         // 根据pageIndex计算得到pageNum
         var pageNum = pageIndex + 1;
 
-        // 跳转页面
-        window.location.href = "log/get/oper/log/page.html?pageNum=" + pageNum;
+
+        window.location.href = "log/get/oper/log/page.html?pageNum=" + pageNum+"&keyword=${param.keyword}"
 
         // 由于每一个页码按钮都是超链接，所以在这个函数最后取消超链接的默认行为
         return false;

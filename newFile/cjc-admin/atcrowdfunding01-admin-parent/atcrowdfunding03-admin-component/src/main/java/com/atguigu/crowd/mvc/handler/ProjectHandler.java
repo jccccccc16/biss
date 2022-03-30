@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,19 +80,21 @@ public class ProjectHandler {
     @PreAuthorize("hasAuthority('project:do:review')")
     @RequestMapping("/do/review/project.html")
     public String doReview(
-            @RequestParam("projectId") Integer projectId
+            @RequestParam("projectId") Integer projectId,
+            HttpServletRequest request
     ){
         int i = projectService.doReview(projectId);
         if(i==0){
             throw new RuntimeException("操作失败");
         }
-        return "projects-review";
+        request.setAttribute("message","通过审核成功");
+        return "redirect:/project/get/project/to/be/review/page.html";
     }
 
     /**
      * 审核不通过
      * @param projectId
-     * @param message
+     * @param remark
      * @param modelMap
      * @return
      */
@@ -100,15 +103,15 @@ public class ProjectHandler {
     @RequestMapping("/do/disReview/project.html")
     public String doDisReview(
             @RequestParam("projectId") Integer projectId,
-            @RequestParam("message") String message,
+            @RequestParam("message") String remark,
             ModelMap modelMap
 
     ){
-        int i = projectService.doDisReview(projectId, message);
+        int i = projectService.doDisReview(projectId, remark);
         if(i==0){
             throw new RuntimeException("操作失败");
         }
-        return "projects-review";
+        return "redirect:/project/get/project/to/be/review/page.html";
     }
 
 

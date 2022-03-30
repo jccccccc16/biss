@@ -5,8 +5,7 @@
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<div>
-				<a class="navbar-brand" style="font-size: 32px;" href="">众筹平台 -
-					控制面板</a>
+				<a class="navbar-brand" style="font-size: 32px;" href="">大学生创新创业众筹平台 - 后端管理系统</a>
 			</div>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">

@@ -81,7 +81,7 @@ public class RoleHandler {
 	 * @param keyword
 	 * @return
 	 */
-
+	@BusinessType("查询角色")
 	@PreAuthorize("hasAuthority('role:get')")
 	@RequestMapping("/role/get/page/info.json")
 	public ResultEntity<PageInfo<Role>> getPageInfo(

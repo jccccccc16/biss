@@ -46,5 +46,20 @@ public interface ProjectPOMapper {
      */
     List<ProjectReview> selectProjectsWithoutStatusEqualTo0and2();
 
+    /**
+     * 插入审核表
+     *
+     * @param adminId
+     * @param projectId
+     * @param remark
+     * @param createDate
+     * @return
+     */
+    int insertReviewProjectAdmin(
+            @Param("adminId") Integer adminId,
+            @Param("projectId") Integer projectId,
+            @Param("remark") String remark,
+            @Param("createDate") String createDate);
+
 
 }

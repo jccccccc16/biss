@@ -220,11 +220,12 @@
                                                class="form-control" placeholder="请输入审核不通过的理由"
                                                autofocus>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button id="submitDisReviewBtn" type="submit" class="btn btn-primary">确定</button>
+                                    </div>
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">确定</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
