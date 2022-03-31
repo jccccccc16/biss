@@ -28,4 +28,17 @@ public interface ProjectService {
     int doDisReview(Integer projectId,String message);
 
     PageInfo<ProjectReview> getProjects(Integer pageNum,Integer pageSize);
+
+    /**
+     * 获取众筹中的项目
+     * @return
+     */
+    List<ProjectPO> getProjectCollecting();
+
+    /**
+     * 更新
+     * @param projectPO
+     * @return
+     */
+    int updateSelective(ProjectPO projectPO);
 }

@@ -157,7 +157,7 @@
                                     </td>
 
                                     <td>
-                                            ${projectReview.remark}
+                                            ${projectReview.projectPO.message}
                                     </td>
                                     <td>
                                         <c:if test="${projectReview.projectPO.status==1}">

@@ -160,7 +160,7 @@ public class ProjectServiceImpl implements ProjectService {
             // 修改状态
             reviewProjectAdmin.setProjectStatus(1);
             projectPO.setStatus(1);
-
+            projectPO.setDeploydate(CrowdUtil.getNow(CrowdConstant.DEPlOY_DATE_PATTERN));
             // 第二次审核
             if(isDiErCiShenHe){
 
@@ -221,6 +221,30 @@ public class ProjectServiceImpl implements ProjectService {
         PageHelper.startPage(pageNum,pageSize);
         List<ProjectReview> projectReviewList = projectPOMapper.selectProjectsWithoutStatusEqualTo0and2();
         return new PageInfo<ProjectReview>(projectReviewList);
+    }
+
+    /**
+     * 获取众筹中的项目
+     * @return
+     */
+    @Override
+    public List<ProjectPO> getProjectCollecting() {
+        ProjectPOExample projectPOExample = new ProjectPOExample();
+        // 查询条件为1，
+        projectPOExample.createCriteria().andStatusEqualTo(1);
+        List<ProjectPO> projectPOS = projectPOMapper.selectByExample(projectPOExample);
+        return projectPOS;
+    }
+
+    /**
+     * 更新
+     * @param projectPO
+     * @return
+     */
+    @Override
+    public int updateSelective(ProjectPO projectPO) {
+        int i = projectPOMapper.updateByPrimaryKeySelective(projectPO);
+        return i;
     }
 
     /**

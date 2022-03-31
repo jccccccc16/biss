@@ -16,4 +16,8 @@ public class CrowdConstant {
 	public static final String MESSAGE_CAN_NOT_REMOVE_CURRENT_USER="不能删除当前用户";
 	public static final String DATE_PATTERN =  "yyyy-MM-dd HH:mm:ss";
 
+	// 发起众筹日期
+	public static final String DEPlOY_DATE_PATTERN="yyyy-MM-dd";
+
+	public static final String MESSAGE_PROJECT_OVERDUE = "项目超过众筹期限，众筹失败";
 }

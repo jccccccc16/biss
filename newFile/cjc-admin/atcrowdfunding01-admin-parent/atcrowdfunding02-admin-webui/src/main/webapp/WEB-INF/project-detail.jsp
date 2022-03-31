@@ -77,6 +77,31 @@
                                 <div style="float:right;">
                                 </div>
                             </c:if>
+<%--                            如果是项目管理查看详情--%>
+                            <c:if test="${requestScope.type=='CHECK_DETAIL_PROJECT_PAGE'}">
+                                <h3>
+                                    <span><c:if test="${projectReview.projectPO.status==1}">
+                                        众筹中
+                                    </c:if>
+                                        <c:if test="${projectReview.projectPO.status==3}">
+                                            众筹成功，待转账
+                                        </c:if>
+                                        <c:if test="${projectReview.projectPO.status==4}">
+                                            众筹失败，待退款
+                                        </c:if>
+                                        <c:if test="${projectReview.projectPO.status==5}">
+                                            众筹失败，资金已退回
+                                        </c:if>
+                                        <c:if test="${projectReview.projectPO.status==6}">
+                                            众筹成功，已转账
+                                        </c:if></span>
+                                </h3>
+                                <div style="float:left;width:70%;">
+                                        ${detailProject.message}
+                                </div>
+                                <div style="float:right;">
+                                </div>
+                            </c:if>
                         </div>
                         <div class="col-md-4 column">
                             <div class="panel panel-default" style="border-radius: 0px;">
@@ -85,9 +110,6 @@
                                     <span class="label label-success"><i class="glyphicon glyphicon-tag"></i>
                                         <c:if test="${detailProject.status == 0}">
                                             <span>待审核</span>
-                                        </c:if>
-                                        <c:if test="${detailProject.status == 2}">
-                                            <span>审核不通过</span>
                                         </c:if>
                                         <c:if test="${detailProject.status == 2}">
                                             <span>审核不通过</span>
