@@ -1,6 +1,7 @@
 package com.atguigu.crowd.mapper;
 
 
+import com.atguigu.crowd.entity.Member;
 import com.atguigu.crowd.entity.MemberPO;
 import com.atguigu.crowd.entity.MemberPOExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,6 @@ public interface MemberPOMapper {
     int updateByPrimaryKeySelective(MemberPO record);
 
     int updateByPrimaryKey(MemberPO record);
+
+    List<Member> selectMemberList(@Param("keyword") String keyword);
 }

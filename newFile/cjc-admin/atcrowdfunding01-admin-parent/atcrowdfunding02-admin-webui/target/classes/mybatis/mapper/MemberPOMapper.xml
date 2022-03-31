@@ -89,6 +89,18 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectMemberList" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from t_member
+    where 1=1
+    <if test="keyword!=null||keyword!=''">
+      and
+      loginacct like concat("%",#{keyword},"%") or
+      username like concat("%",#{keyword},"%") or
+      email like concat("%",#{keyword},"%") or
+      realname  like concat("%",#{keyword},"%")
+    </if>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_member
     where id = #{id,jdbcType=INTEGER}

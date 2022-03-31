@@ -2,8 +2,11 @@ package com.atguigu.crowd.service.impl;
 
 import java.util.List;
 
+import com.atguigu.crowd.entity.Member;
 import com.atguigu.crowd.entity.MemberPO;
 import com.atguigu.crowd.entity.MemberPOExample;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -13,8 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.atguigu.crowd.mapper.MemberPOMapper;
 import com.atguigu.crowd.service.api.MemberService;
 
-// 在类上使用@Transactional(readOnly = true)针对查询操作设置事务属性
-@Transactional(readOnly = true)
+
 @Service
 public class MemberServiceImpl implements MemberService {
 	
@@ -66,6 +68,13 @@ public class MemberServiceImpl implements MemberService {
 			return null;
 		}
 		return memberPOS.get(0);
+	}
+
+	@Override
+	public PageInfo<Member> getMemberPageInfo(String keyword, Integer pageNum, Integer pageSize) {
+		PageHelper.startPage(pageNum,pageSize);
+		List<Member> members = memberPOMapper.selectMemberList(keyword);
+		return new PageInfo<Member>(members);
 	}
 
 }

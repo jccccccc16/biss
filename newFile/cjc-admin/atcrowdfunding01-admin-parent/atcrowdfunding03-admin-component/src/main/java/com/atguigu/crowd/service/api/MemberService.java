@@ -1,6 +1,8 @@
 package com.atguigu.crowd.service.api;
 
+import com.atguigu.crowd.entity.Member;
 import com.atguigu.crowd.entity.MemberPO;
+import com.github.pagehelper.PageInfo;
 
 
 public interface MemberService {
@@ -12,5 +14,5 @@ public interface MemberService {
 	MemberPO getMemberById(Integer memberId);
 
 
-
+    PageInfo<Member> getMemberPageInfo(String keyword, Integer pageNum, Integer pageSize);
 }
