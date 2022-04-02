@@ -46,7 +46,7 @@
         var pageNum = pageIndex + 1;
 
 
-        window.location.href = "log/get/oper/log/page.html?pageNum=" + pageNum+"&keyword=${param.keyword}"
+        window.location.href = "log/get/oper/log/page.html?pageNum=" + pageNum + "&keyword=${param.keyword}"
 
         // 由于每一个页码按钮都是超链接，所以在这个函数最后取消超链接的默认行为
         return false;
@@ -84,7 +84,7 @@
                     <br>
                     <hr style="clear: both;">
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover table-bordered">
                             <thead>
                             <tr>
                                 <th width="30">#</th>
@@ -108,18 +108,25 @@
                             </c:if>
                             <c:if test="${!empty requestScope.pageInfo.list }">
                                 <c:forEach items="${requestScope.pageInfo.list }" var="operLog" varStatus="myStatus">
-                                    <tr>
-                                        <td>${myStatus.count+pageInfo.pageSize*(pageInfo.pageNum-1)}</td>
-                                            <%--												<td><input type="checkbox"></td>--%>
-                                        <td>${operLog.operName }</td>
-                                        <td>${operLog.businessType }</td>
-                                        <td>${operLog.method }</td>
-                                        <td>${operLog.requestMethod}</td>
-                                        <td>${operLog.operUrl }</td>
-                                        <td>${operLog.operIp }</td>
-                                        <td>${operLog.status }</td>
-                                        <td>${operLog.errorMsg }</td>
-                                        <td>${operLog.createTime }</td>
+                                    <c:if test="${operLog.status=='请求失败'}">
+                                        <tr class="danger">
+                                    </c:if>
+                                    <c:if test="${operLog.status!='请求失败'}">
+                                        <tr >
+                                    </c:if>
+                                    <td>${myStatus.count+pageInfo.pageSize*(pageInfo.pageNum-1)}</td>
+                                    <%--												<td><input type="checkbox"></td>--%>
+                                    <td>${operLog.operName }</td>
+                                    <td>${operLog.businessType }</td>
+                                    <td>${operLog.method }</td>
+                                    <td>${operLog.requestMethod}</td>
+                                    <td>${operLog.operUrl }</td>
+                                    <td>${operLog.operIp }</td>
+
+
+                                    <td>${operLog.status }</td>
+                                    <td>${operLog.errorMsg }</td>
+                                    <td>${operLog.createTime }</td>
                                     </tr>
                                 </c:forEach>
                             </c:if>

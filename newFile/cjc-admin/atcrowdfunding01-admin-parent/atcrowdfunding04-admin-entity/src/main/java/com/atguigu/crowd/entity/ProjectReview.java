@@ -11,8 +11,9 @@ public class ProjectReview implements Serializable {
     // 项目发起人
     private String loginAcct;
 
+    // 审核员
     private String reviewAdmin;
-
+    // 审核日期
     private String reviewDate;
 
     private String remark;

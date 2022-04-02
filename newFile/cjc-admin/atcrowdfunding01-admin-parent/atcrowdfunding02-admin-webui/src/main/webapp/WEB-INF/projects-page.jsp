@@ -102,7 +102,7 @@
                 <br>
                 <hr style="clear:both;">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-bordered">
                         <thead>
                         <tr>
                             <th width="30">#</th>
@@ -131,7 +131,15 @@
                         <c:if test="${!empty requestScope.pageInfo.list}">
                             <c:forEach items="${requestScope.pageInfo.list}" var="projectReview"
                                        varStatus="myStatus">
-                                <tr>
+                                <c:if test="${projectReview.projectPO.status==3}">
+                                    <tr class="success"></tr>
+                                </c:if>
+                                <c:if test="${projectReview.projectPO.status==4}">
+                                    <tr class="danger"></tr>
+                                </c:if>
+                                <c:if test="${projectReview.projectPO.status!=4||projectReview.projectPO.status!=3}">
+                                    <tr class="info">
+                                </c:if>
                                     <td>${myStatus.count}</td>
                                     <td>${projectReview.projectPO.projectName}</td>
                                     <td>${projectReview.loginAcct}</td>

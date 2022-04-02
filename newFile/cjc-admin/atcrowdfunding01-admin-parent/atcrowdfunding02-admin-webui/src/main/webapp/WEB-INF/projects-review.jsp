@@ -133,27 +133,20 @@
                                     <td>${projectReview.projectPO.deploydate}</td>
                                     <td>${projectReview.reviewDate}</td>
                                     <td>
-                                        <c:if test="${projectReview.projectPO.status==0}">
+                                        <c:if test="${projectReview.projectStatus==0}">
                                             待审核
                                         </c:if>
-                                        <c:if test="${projectReview.projectPO.status==2}">
+                                        <c:if test="${projectReview.projectStatus==2}">
                                             审核不通过
                                         </c:if>
                                     </td>
                                     <td>${projectReview.remark}</td>
                                     <td>
-                                            <%--如果该项目待审核中--%>
-                                        <c:if test="${projectReview.projectPO.status==0 ||projectReview.projectPO.status==2}">
+
                                             <a id="reviewA"
                                                href="project/to/get/project/detail.html?projectId=${projectReview.projectPO.id}&type=REVIEW_DETAIL_PROJECT_PAGE"
                                                class="btn btn-danger btn-xs"><i
                                                     class="glyphicon glyphicon-search"></i>审核</a>
-                                        </c:if>
-                                            <%--如果该项目审核不通过--%>
-                                        <c:if test="${projectReview.projectPO.status==10}">
-                                            <a id="checkProjectA" href="project/to/get/project/detail.html?projectId=${projectReview.projectPO.id}&type=DISREVIEW_DETAIL_PROJECT_PAGE" class="btn btn-primary btn-xs"><i
-                                                    class="glyphicon glyphicon-search"></i>查看项目</a>
-                                        </c:if>
                                     </td>
                                 </tr>
                             </c:forEach>

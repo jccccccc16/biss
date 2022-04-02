@@ -48,7 +48,6 @@ public class OperLogServiceImpl implements OperLogService {
     public PageInfo<OperLog> getOperLogList(Integer pageNum, Integer pageSize, String keyword,String datePre,String datePost) {
 
         // 根据日期倒序获取日志
-
         PageHelper.startPage(pageNum, pageSize);
         List<OperLog> operLogList = operLogMapper.selectOperLogList(keyword,datePre,datePost);
         logger.info("查询到的日志"+operLogList.toString());

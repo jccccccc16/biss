@@ -94,7 +94,7 @@
 						<br>
 						<hr style="clear: both;">
 						<div class="table-responsive">
-							<table class="table table-hover">
+							<table class="table table-hover table-bordered">
 								<thead>
 									<tr>
 										<th width="30">#</th>

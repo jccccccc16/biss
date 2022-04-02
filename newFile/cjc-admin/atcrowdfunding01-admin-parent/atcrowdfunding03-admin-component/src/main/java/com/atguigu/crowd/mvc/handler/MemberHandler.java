@@ -2,9 +2,11 @@ package com.atguigu.crowd.mvc.handler;
 
 import com.atguigu.crowd.entity.Member;
 import com.atguigu.crowd.entity.MemberVO;
+import com.atguigu.crowd.monitor.annotation.BusinessType;
 import com.atguigu.crowd.service.api.MemberService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +18,8 @@ public class MemberHandler {
     @Autowired
     private MemberService memberService;
 
-
+    @BusinessType("查询会员列表")
+    @PreAuthorize("hasAuthority('member:get')")
     @RequestMapping("/get/member/page.html")
     public String getMemberPage(
             ModelMap modelMap,

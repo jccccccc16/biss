@@ -122,6 +122,8 @@
 				jdbcType="INTEGER" />
 		<result column="createdate" property="projectPO.createdate"
 				jdbcType="VARCHAR" />
+		<result column="review_date" property="reviewDate"
+				jdbcType="VARCHAR" />
 		<result column="follower" property="projectPO.follower"
 				jdbcType="INTEGER" />
 		<result column="header_picture_path"
@@ -130,7 +132,7 @@
 				property="projectPO.message" jdbcType="VARCHAR" />
 		<result column="remark"
 				property="remark" jdbcType="VARCHAR" />
-		<result column="review_admin_login_acct"
+		<result column="review_admin"
 				property="reviewAdmin" jdbcType="VARCHAR" />
 		<result column="project_status"
 				property="projectStatus" jdbcType="VARCHAR" />
@@ -241,7 +243,7 @@
 	</sql>
 
 	<select id="selectProjectReviews" resultMap="projectReview">
-SELECT p.*,rpa.remark,a.login_acct review_admin_login_acct, rpa.project_status project_status, rpa.create_date review_date ,m.loginacct member_login_acct FROM t_project p
+SELECT p.*,rpa.remark,a.login_acct review_admin, rpa.project_status project_status, rpa.create_date review_date ,m.loginacct loginacct FROM t_project p
 LEFT JOIN t_member m ON p.memberid = m.id
 LEFT JOIN t_review_project_admin rpa ON p.id =  rpa.project_id
 LEFT JOIN t_admin a ON a.id  = rpa.admin_id
@@ -264,7 +266,13 @@ WHERE rpa.project_status = 0 OR rpa.project_status=2
 		</if>
 	</select>
 	<select id="selectProjectsWithoutStatusEqualTo0and2" resultMap="projectReview">
-		SELECT p.*,m.loginacct FROM t_project p  LEFT JOIN t_member m ON p.memberid = m.id WHERE p.status != 0 and p.status!=2
+-- 		SELECT p.*,m.loginacct FROM t_project p  LEFT JOIN t_member m ON p.memberid = m.id WHERE p.status != 0 and p.status!=2
+SELECT p.*,m.loginacct,rpa.remark,rpa.create_date review_date,a.login_acct review_admin FROM t_project p
+LEFT JOIN t_member m ON p.memberid = m.id
+LEFT JOIN t_review_project_admin rpa ON rpa.project_id = p.id
+LEFT JOIN t_admin a ON a.id = rpa.admin_id
+WHERE p.status != 0 AND p.status!=2
+
 	</select>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
