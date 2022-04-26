@@ -1,6 +1,7 @@
 package com.cjc.crow.service.api;
 
 import com.cjc.crow.entity.Address;
+import com.cjc.crow.entity.OrderDetailVO;
 import com.cjc.crow.entity.OrderProjectVO;
 import com.cjc.crow.entity.OrderVO;
 
@@ -24,6 +25,9 @@ public interface OrderService {
     Address saveAddress(Address address);
 
     public void saveOrder(OrderVO orderVO);
+
+    public OrderDetailVO getOrderDetailVOByDetailNum(String orderNum);
+
 
 
 }

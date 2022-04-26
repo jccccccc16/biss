@@ -130,9 +130,9 @@
                             智能时代，酷驰触控厨房龙头，让煮妇解放双手，触发更多烹饪灵感，让美味信手拈来。
                         </div>
                         <div style="float:right;">
-                            <button type="button" class="btn btn-default"><i style="color:#f60"
-                                                                             class="glyphicon glyphicon-heart"></i> 关注
-                                <span th:text="${detailProject.follower}">111</span>
+<!--                            <button type="button" class="btn btn-default"><i style="color:#f60"-->
+<!--                                                                             class="glyphicon glyphicon-heart"></i> 关注-->
+<!--                                <span th:text="${detailProject.follower}">111</span>-->
                             </button>
                         </div>
                     </div>
@@ -180,34 +180,6 @@
                                         <button type="button" class="btn  btn-warning btn-lg btn-block"
                                                 data-toggle="modal" data-target="#myModal">立即支持
                                         </button>
-                                    </div>
-                                </div>
-                                <div class="panel-footer" style="    background-color: #fff;
-                                    border-top: 1px solid #ddd;
-                                    border-bottom-right-radius: 0px;
-                                    border-bottom-left-radius: 0px;">
-                                    <div class="container-fluid">
-                                        <div class="row clearfix">
-                                            <div class="col-md-3 column" style="padding:0;">
-                                                <img alt="140x140" src="img/services-box2.jpg"
-                                                     data-holder-rendered="true" style="width: 80px; height: 80px;">
-                                            </div>
-                                            <div class="col-md-9 column">
-                                                <div class="">
-                                                    <h4>
-                                                        <b>福建省南安厨卫</b> <span style="float:right;font-size:12px;"
-                                                                             class="label label-success">已认证</span>
-                                                    </h4>
-                                                    <p style="font-size:12px">
-                                                        酷驰是一家年轻的厨卫科技公司，我们有一支朝气蓬勃，有激情、有想法、敢实践的团队。
-
-                                                    </p>
-                                                    <p style="font-size:12px">
-                                                        客服电话:0595-86218855
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -266,20 +238,20 @@
                                 </div>
                             </div>
 
-                            <div><h2>为你推荐</h2>
-                                <hr>
-                            </div>
-                            <div class="prjtip panel panel-default" style="border-radius: 0px;">
-                                <div class="panel-body">
-                                    <img src="img/product-3.png" width="100%" height="100%">
-                                </div>
-                            </div>
+<!--                            <div><h2>为你推荐</h2>-->
+<!--                                <hr>-->
+<!--                            </div>-->
+<!--                            <div class="prjtip panel panel-default" style="border-radius: 0px;">-->
+<!--                                <div class="panel-body">-->
+<!--                                    <img src="img/product-3.png" width="100%" height="100%">-->
+<!--                                </div>-->
+<!--                            </div>-->
 
-                            <div class="prjtip panel panel-default" style="border-radius: 0px;">
-                                <div class="panel-body">
-                                    <img src="img/product-4.jpg" width="100%" height="100%">
-                                </div>
-                            </div>
+<!--                            <div class="prjtip panel panel-default" style="border-radius: 0px;">-->
+<!--                                <div class="panel-body">-->
+<!--                                    <img src="img/product-4.jpg" width="100%" height="100%">-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -324,68 +296,70 @@
                     <div class="row clearfix">
                         <div class="col-sm-3 col-md-3 column" id="myScrollspy">
                             <ul class="nav nav-tabs nav-stacked">
-                                <li class="active"><a href="#section-1">￥1.00</a></li>
-                                <li class="active"><a href="#section-2">￥149.00</a></li>
-                                <li class="active"><a href="#section-3">￥249.00</a></li>
-                                <li class="active"><a href="#section-4">￥549.00</a></li>
-                                <li class="active"><a href="#section-5">￥1999.00</a></li>
+                                <li th:each="return:${detailProject.returnDetailVOList}"  class="active"><a href="#section-1">￥[[${return.supportMoney}]]</a></li>
+<!--                                <li class="active"><a href="#section-2">￥149.00</a></li>-->
+<!--                                <li class="active"><a href="#section-3">￥249.00</a></li>-->
+<!--                                <li class="active"><a href="#section-4">￥549.00</a></li>-->
+<!--                                <li class="active"><a href="#section-5">￥1999.00</a></li>-->
                             </ul>
                         </div>
                         <div id="navList" class="col-sm-9 col-md-9 column" style="height:400px;overflow-y:auto;">
-                            <h2 id="section-1" style="border-bottom:1px dashed #ddd;"><span
-                                    style="font-size:20px;font-weight:bold;">￥1.00</span><span
-                                    style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>
-                            <p>配送费用：全国包邮</p>
-                            <p>预计发放时间：项目筹款成功后的30天内</p>
-                            <button type="button" class="btn  btn-warning btn-lg "
-                                    onclick="window.location.href='pay-step-1.html'">支持
-                            </button>
-                            <br><br>
-                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>
-                            <hr>
-                            <h2 id="section-2" style="border-bottom:1px dashed #ddd;"><span
-                                    style="font-size:20px;font-weight:bold;">￥149.00</span><span
-                                    style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>
-                            <p>配送费用：全国包邮</p>
-                            <p>预计发放时间：项目筹款成功后的30天内</p>
-                            <button type="button" class="btn  btn-warning btn-lg "
-                                    onclick="window.location.href='pay-step-1.html'">支持
-                            </button>
-                            <br><br>
-                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>
-                            <hr>
-                            <h2 id="section-3" style="border-bottom:1px dashed #ddd;"><span
-                                    style="font-size:20px;font-weight:bold;">￥249.00</span><span
-                                    style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>
-                            <p>配送费用：全国包邮</p>
-                            <p>预计发放时间：项目筹款成功后的30天内</p>
-                            <button type="button" class="btn  btn-warning btn-lg "
-                                    onclick="window.location.href='pay-step-1.html'">支持
-                            </button>
-                            <br><br>
-                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>
-                            <hr>
-                            <h2 id="section-4" style="border-bottom:1px dashed #ddd;"><span
-                                    style="font-size:20px;font-weight:bold;">￥549.00</span><span
-                                    style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>
-                            <p>配送费用：全国包邮</p>
-                            <p>预计发放时间：项目筹款成功后的30天内</p>
-                            <button type="button" class="btn  btn-warning btn-lg "
-                                    onclick="window.location.href='pay-step-1.html'">支持
-                            </button>
-                            <br><br>
-                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>
-                            <hr>
-                            <h2 id="section-5" style="border-bottom:1px dashed #ddd;"><span
-                                    style="font-size:20px;font-weight:bold;">￥1999.00</span><span
-                                    style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>
-                            <p>配送费用：全国包邮</p>
-                            <p>预计发放时间：项目筹款成功后的30天内</p>
-                            <button type="button" class="btn  btn-warning btn-lg "
-                                    onclick="window.location.href='pay-step-1.html'">支持
-                            </button>
-                            <br><br>
-                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>
+                            <div th:each="return:${detailProject.returnDetailVOList}">
+                                <h2 id="section-1" style="border-bottom:1px dashed #ddd;"><span
+                                        style="font-size:20px;font-weight:bold;">￥[[${return.supportMoney}]]</span><span th:if="${return.signalPurchase == 0}" th:text="'无限额，'+${return.supporterCount}+'位支持者'" style="float:right;font-size:12px;">无限额，447位支持者</span>
+                                    <span th:if="${return.signalPurchase != 0}" th:text="'限额，'+${return.supporterCount}+'位支持者'" style="float:right;font-size:12px;">无限额，447位支持者</span></h2>
+                                <p th:if="${return.freight == 0}" th:text="'配送费用：包邮'">配送费用：包邮</p>
+                                <p>预计发放时间：项目筹款成功后的30天内</p>
+                                <a th:href="'http://localhost/order/confirm/return/info/'+${detailProject.projectId}+'/'+${return.returnId}"  class="btn  btn-warning btn-lg"
+                                >支持</a>
+                                <br><br>
+                                <p th:text="${return.content}">感谢您的支持，在众筹开始后，您将以79元的优惠价格获得“遇见彩虹?”智能插座一件（参考价208元）。</p>
+                                <hr>
+                            </div>
+
+<!--                            <h2 id="section-2" style="border-bottom:1px dashed #ddd;"><span-->
+<!--                                    style="font-size:20px;font-weight:bold;">￥149.00</span><span-->
+<!--                                    style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>-->
+<!--                            <p>配送费用：全国包邮</p>-->
+<!--                            <p>预计发放时间：项目筹款成功后的30天内</p>-->
+<!--                            <button type="button" class="btn  btn-warning btn-lg "-->
+<!--                                    onclick="window.location.href='pay-step-1.html'">支持-->
+<!--                            </button>-->
+<!--                            <br><br>-->
+<!--                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>-->
+<!--                            <hr>-->
+<!--                            <h2 id="section-3" style="border-bottom:1px dashed #ddd;"><span-->
+<!--                                    style="font-size:20px;font-weight:bold;">￥249.00</span><span-->
+<!--                                    style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>-->
+<!--                            <p>配送费用：全国包邮</p>-->
+<!--                            <p>预计发放时间：项目筹款成功后的30天内</p>-->
+<!--                            <button type="button" class="btn  btn-warning btn-lg "-->
+<!--                                    onclick="window.location.href='pay-step-1.html'">支持-->
+<!--                            </button>-->
+<!--                            <br><br>-->
+<!--                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>-->
+<!--                            <hr>-->
+<!--                            <h2 id="section-4" style="border-bottom:1px dashed #ddd;"><span-->
+<!--                                    style="font-size:20px;font-weight:bold;">￥549.00</span><span-->
+<!--                                    style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>-->
+<!--                            <p>配送费用：全国包邮</p>-->
+<!--                            <p>预计发放时间：项目筹款成功后的30天内</p>-->
+<!--                            <button type="button" class="btn  btn-warning btn-lg "-->
+<!--                                    onclick="window.location.href='pay-step-1.html'">支持-->
+<!--                            </button>-->
+<!--                            <br><br>-->
+<!--                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>-->
+<!--                            <hr>-->
+<!--                            <h2 id="section-5" style="border-bottom:1px dashed #ddd;"><span-->
+<!--                                    style="font-size:20px;font-weight:bold;">￥1999.00</span><span-->
+<!--                                    style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>-->
+<!--                            <p>配送费用：全国包邮</p>-->
+<!--                            <p>预计发放时间：项目筹款成功后的30天内</p>-->
+<!--                            <button type="button" class="btn  btn-warning btn-lg "-->
+<!--                                    onclick="window.location.href='pay-step-1.html'">支持-->
+<!--                            </button>-->
+<!--                            <br><br>-->
+<!--                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>-->
                         </div>
                     </div>
                 </div>

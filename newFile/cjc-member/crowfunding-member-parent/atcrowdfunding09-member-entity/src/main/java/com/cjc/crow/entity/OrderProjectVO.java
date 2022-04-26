@@ -34,6 +34,25 @@ public class OrderProjectVO implements Serializable {
     // 限购多少
     private Integer purchase;
 
+    private Integer returnId;
+
+    private Integer projectId;
+
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
+    }
+
+    public Integer getReturnId() {
+        return returnId;
+    }
+
+    public void setReturnId(Integer returnId) {
+        this.returnId = returnId;
+    }
 
     public Integer getPurchase() {
         return purchase;

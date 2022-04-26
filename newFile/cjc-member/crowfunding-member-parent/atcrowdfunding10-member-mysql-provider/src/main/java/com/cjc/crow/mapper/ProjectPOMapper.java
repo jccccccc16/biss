@@ -28,13 +28,21 @@ public interface ProjectPOMapper {
     int updateByPrimaryKeySelective(ProjectPO record);
 
     int updateByPrimaryKey(ProjectPO record);
-    void insertTypeRelationship(@Param("typeIdList") List<Integer> typeIdList, @Param("projectId") Integer projectId);
+//    void insertTypeRelationship(@Param("typeIdList") List<Integer> typeIdList, @Param("projectId") Integer projectId);
 
-    void insertTagRelationship(@Param("tagIdList") List<Integer> tagIdList, @Param("projectId") Integer projectId);
+//    void insertTagRelationship(@Param("tagIdList") List<Integer> tagIdList, @Param("projectId") Integer projectId);
 
     List<PortalProjectVO> selectPortalProjectVOByTypeId(Integer typeId);
 
     List<PortalTypeVO> selectPortalTypeVOList();
 
     ProjectDetailVO selectDetailProjectVO(Integer id);
+
+    List<MySupportProjectVO> selectMySupportProjectVO(@Param("memberId") Integer memberId);
+
+    List<MyLaunchProjectVO> selectMyLaunchProjectList(@Param("memberId") Integer memberId);
+
+    int updateSupporter(Integer projectId);
+
+    List<PortalProjectVO> selectPortalProjectList();
 }

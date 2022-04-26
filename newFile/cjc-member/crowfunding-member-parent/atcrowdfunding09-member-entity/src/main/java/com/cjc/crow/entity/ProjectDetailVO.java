@@ -1,5 +1,7 @@
 package com.cjc.crow.entity;
 
+import com.cjc.crow.util.CrowdUtil;
+
 import java.util.List;
 
 /**
@@ -51,6 +53,8 @@ public class ProjectDetailVO {
     public ProjectDetailVO() {
     }
 
+
+
     public ProjectDetailVO(Integer projectId, String projectName, String projectDescription, Integer follower, Integer status, Integer money, Integer supportMoney, Integer percentage, String deployDate, Integer lastDay, Integer supporterCount, String headerPicturePath, List<String> detailPicturePathList, List<ReturnDetailVO> returnDetailVOList, Integer day) {
         this.projectId = projectId;
         this.projectName = projectName;
@@ -68,6 +72,8 @@ public class ProjectDetailVO {
         this.returnDetailVOList = returnDetailVOList;
         this.day = day;
     }
+
+
 
     public Integer getProjectId() {
         return projectId;
@@ -126,6 +132,7 @@ public class ProjectDetailVO {
     }
 
     public Integer getPercentage() {
+        this.percentage= (this.getSupportMoney()/this.getMoney())*100;
         return percentage;
     }
 
@@ -142,6 +149,7 @@ public class ProjectDetailVO {
     }
 
     public Integer getLastDay() {
+        this.lastDay = CrowdUtil.getDateSub(this.getDay(),this.getDeployDate());
         return lastDay;
     }
 

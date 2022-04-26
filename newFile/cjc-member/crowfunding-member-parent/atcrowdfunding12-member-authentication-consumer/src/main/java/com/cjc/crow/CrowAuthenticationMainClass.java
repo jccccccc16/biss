@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * Time: 10:44
  * To change this template use File | Settings | File Templates.
  **/
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds=60*60)
 @EnableConfigurationProperties({ShortMessageProperties.class})
 @EnableEurekaClient
 @SpringBootApplication

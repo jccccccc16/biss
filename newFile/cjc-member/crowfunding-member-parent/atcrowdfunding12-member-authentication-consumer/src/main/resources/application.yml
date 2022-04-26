@@ -1,6 +1,8 @@
 server:
   port: 4000
-
+  servlet:
+    session:
+      timeout: 1800
 spring:
   application:
     name: crow-authenticate

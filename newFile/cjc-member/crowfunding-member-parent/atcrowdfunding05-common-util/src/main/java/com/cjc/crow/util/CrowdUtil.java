@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -103,6 +104,17 @@ public class CrowdUtil {
         }
     }
 
+    /**
+     * 获取当前时间为
+     *
+     * @return
+     */
+    public static String getNow(String pattern) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+        String format = dateFormat.format(new Date());
+        System.out.println(format);
+        return format;
+    }
 
 
 
@@ -253,6 +265,34 @@ public class CrowdUtil {
     }
 
 
+    /**
+     * 获取该时间与现在时间的时间差
+     * 如果是负数，该项目不可用
+     * 用于判断是否众筹失败
+     * @param day 众筹天数
+     * @param createDate 发起日期
+     * @return
+     */
+    public static Integer getDateSub(int day,String createDate){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        /*天数差*/
+        Date now = new Date();
+        try {
+
+            Date toDate1 = simpleDateFormat.parse(createDate);
+            long from1 = now.getTime();
+            long to1 = toDate1.getTime();
+            int days = (int) ((to1 - from1) / (1000 * 60 * 60 * 24))+day;
+            System.out.println("两个时间之间的天数差为：" + days);
+            return days;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
     public static Integer getRandom(Integer unit){
 
         double random = Math.random();
@@ -262,6 +302,22 @@ public class CrowdUtil {
         return result;
 
     }
+
+
+    public static String getProjectStatusString(Integer status){
+        String statusString = "";
+        switch (status){
+            case 0: statusString= "待审核";break;
+            case 1: statusString="审核通过，众筹中";break;
+            case 2: statusString= "审核不通过";break;
+            case 3: statusString="众筹成功";break;
+            case 4: statusString="众筹失败，待退款";break;
+            case 5: statusString="金额已退回";break;
+            case 6: statusString="众筹成功已转账";break;
+        }
+        return statusString;
+    }
+
 
 
 

@@ -19,6 +19,16 @@ public class OrderProject implements Serializable {
 
     private Integer orderId;
 
+    private  Integer returnId;
+
+    public Integer getReturnId() {
+        return returnId;
+    }
+
+    public void setReturnId(Integer returnId) {
+        this.returnId = returnId;
+    }
+
     public Integer getId() {
         return id;
     }

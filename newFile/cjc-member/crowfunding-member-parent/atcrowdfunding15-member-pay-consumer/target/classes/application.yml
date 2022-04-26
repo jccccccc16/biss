@@ -30,3 +30,6 @@ ali:
     notify-url: http://localhost/pay/notify
     return-url: http://localhost/pay/return
     sign-type: RSA2
+
+
+# https://openhome.alipay.com/platform/appDaily.htm?tab=account

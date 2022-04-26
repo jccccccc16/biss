@@ -1,9 +1,7 @@
 package com.cjc.crow.service.api;
 
-import com.cjc.crow.entity.PortalProjectVO;
-import com.cjc.crow.entity.PortalTypeVO;
-import com.cjc.crow.entity.ProjectDetailVO;
-import com.cjc.crow.entity.ProjectVO;
+import com.cjc.crow.entity.*;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -15,4 +13,11 @@ public interface ProjectService {
 
     ProjectDetailVO getDetailProjectVO(Integer id);
 
+    PageInfo<MySupportProjectVO> getMySupportProjectVOList(Integer memberId,Integer pageNum,Integer pageSize);
+
+    PageInfo<MyLaunchProjectVO> getMyLaunchProjectVOPageInfo(Integer memberId,Integer pageNum,Integer pageSize);
+
+    int updateProjectSupporter(Integer projectId);
+
+    PageInfo<PortalProjectVO> getPortalProjectList(Integer pageNum,Integer pageSize);
 }

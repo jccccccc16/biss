@@ -10,6 +10,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * Time: 19:14
  * To change this template use File | Settings | File Templates.
  **/
+
 @EnableEurekaClient
 @SpringBootApplication
 public class CrowdRedisMainClass {
@@ -17,3 +18,6 @@ public class CrowdRedisMainClass {
         SpringApplication.run(CrowdRedisMainClass.class,args);
     }
 }
+
+
+

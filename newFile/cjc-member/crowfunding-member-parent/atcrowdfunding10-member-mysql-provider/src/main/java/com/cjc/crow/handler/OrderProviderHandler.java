@@ -1,6 +1,7 @@
 package com.cjc.crow.handler;
 
 import com.cjc.crow.entity.Address;
+import com.cjc.crow.entity.OrderDetailVO;
 import com.cjc.crow.entity.OrderProjectVO;
 import com.cjc.crow.entity.OrderVO;
 import com.cjc.crow.service.api.OrderService;
@@ -79,6 +80,7 @@ public class OrderProviderHandler {
     ResultEntity<String> saveOrderRemote(@RequestBody OrderVO orderVO) {
 
         try {
+
             orderService.saveOrder(orderVO);
 
             return ResultEntity.successWithoutData();
@@ -90,6 +92,27 @@ public class OrderProviderHandler {
         }
 
     }
+
+    @RequestMapping("/get/order/detail/by/{orderNum}")
+    ResultEntity<OrderDetailVO> getOrderDetailByOrderNum(
+            @PathVariable("orderNum") String  orderNum
+    ){
+
+        try {
+
+            OrderDetailVO orderDetailVOByDetailNum = orderService.getOrderDetailVOByDetailNum(orderNum);
+            return ResultEntity.successWithData(orderDetailVOByDetailNum);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return ResultEntity.failed(e.getMessage());
+        }
+
+
+    }
+
+
 
 
 }

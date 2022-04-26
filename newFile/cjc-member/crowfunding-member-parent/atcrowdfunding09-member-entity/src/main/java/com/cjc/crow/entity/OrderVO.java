@@ -29,6 +29,50 @@ public class OrderVO implements Serializable {
 
     private Integer addressId;
 
+    // 订单创建时间
+    private String createTime;
+    // 发货时间
+    private String sendTime;
+
+    // 确认订单时间
+    private String confirmTime;
+    // 退款时间
+    private String returnTime;
+
+    private Integer status;
+
+    public String getSendTime() {
+        return sendTime;
+    }
+
+    public void setSendTime(String sendTime) {
+        this.sendTime = sendTime;
+    }
+
+    public String getConfirmTime() {
+        return confirmTime;
+    }
+
+    public void setConfirmTime(String confirmTime) {
+        this.confirmTime = confirmTime;
+    }
+
+    public String getReturnTime() {
+        return returnTime;
+    }
+
+    public void setReturnTime(String returnTime) {
+        this.returnTime = returnTime;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
     public Integer getId() {
         return id;
     }

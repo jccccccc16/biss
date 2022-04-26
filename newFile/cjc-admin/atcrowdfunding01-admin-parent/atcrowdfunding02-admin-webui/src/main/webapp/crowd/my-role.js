@@ -184,7 +184,6 @@ function fillTableBody(pageInfo) {
 	// 判断pageInfo对象是否有效
 	if(pageInfo == null || pageInfo == undefined || pageInfo.list == null || pageInfo.list.length == 0) {
 		$("#rolePageBody").append("<tr><td colspan='4' align='center' >抱歉！没有查询到您搜索的数据！</td></tr>");
-		
 		return ;
 	}
 	

@@ -3,11 +3,14 @@ package com.cjc.crow.service.impl;
 import com.cjc.crow.entity.*;
 import com.cjc.crow.mapper.*;
 import com.cjc.crow.service.api.ProjectService;
-import javafx.scene.chart.PieChart;
+
+
+import com.cjc.crow.util.CrowdUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -98,15 +101,15 @@ public class ProjectServiceImpl implements ProjectService {
 
         // 插入类型
 
-        List<Integer> typeIdList = projectVO.getTypeIdList();
-
-        projectPOMapper.insertTypeRelationship(typeIdList,projectId);
+//        List<Integer> typeIdList = projectVO.getTypeIdList();
+//
+//        projectPOMapper.insertTypeRelationship(typeIdList,projectId);
 
         // 插入标签
 
         List<Integer> tagIdList = projectVO.getTagIdList();
 
-        projectPOMapper.insertTagRelationship(tagIdList,projectId);
+//        projectPOMapper.insertTagRelationship(tagIdList,projectId);
 
         // 插入详情图片
         List<String> detailPicturePathList = projectVO.getDetailPicturePathList();
@@ -163,4 +166,47 @@ public class ProjectServiceImpl implements ProjectService {
 
         return projectDetailVO;
     }
+
+    /**
+     *
+     * 获取我支持的项目
+     *
+     * @param memberId
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    public PageInfo<MySupportProjectVO> getMySupportProjectVOList(Integer memberId, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(1,3);
+        List<MySupportProjectVO> mySupportProjectVOList = projectPOMapper.selectMySupportProjectVO(memberId);
+        logger.info("查询到该用户所支持的项目："+mySupportProjectVOList);
+        for (MySupportProjectVO mySupportProjectVO : mySupportProjectVOList) {
+           mySupportProjectVO.setLastDays(CrowdUtil.getDateSub(mySupportProjectVO.getDay(),mySupportProjectVO.getDeployDate()));
+        }
+
+        return new PageInfo<MySupportProjectVO>(mySupportProjectVOList);
+    }
+
+    public PageInfo<MyLaunchProjectVO> getMyLaunchProjectVOPageInfo(Integer memberId, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<MyLaunchProjectVO> myLaunchProjectVOS = projectPOMapper.selectMyLaunchProjectList(memberId);
+        for (MyLaunchProjectVO myLaunchProjectVO : myLaunchProjectVOS) {
+            myLaunchProjectVO.setLastDays( CrowdUtil.getDateSub(myLaunchProjectVO.getDay(), myLaunchProjectVO.getDeployDate()));
+        }
+        logger.info("查询到该用户所发起的项目："+myLaunchProjectVOS);
+        return new PageInfo<MyLaunchProjectVO>(myLaunchProjectVOS);
+    }
+
+    public int updateProjectSupporter(Integer projectId) {
+        return projectPOMapper.updateSupporter(projectId);
+    }
+
+    public PageInfo<PortalProjectVO> getPortalProjectList(Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<PortalProjectVO> portalProjectVOList = projectPOMapper.selectPortalProjectList();
+        logger.info(portalProjectVOList.toString());
+        return new PageInfo<PortalProjectVO>(portalProjectVOList);
+    }
+
+
 }

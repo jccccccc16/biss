@@ -10,7 +10,44 @@
     <result column="invoice_title" property="invoiceTitle" jdbcType="CHAR" />
     <result column="order_remark" property="orderRemark" jdbcType="CHAR" />
     <result column="address_id" property="addressId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="CHAR" />
+    <result column="send_time" property="sendTime" jdbcType="CHAR" />
+    <result column="confirm_time" property="confirmTime" jdbcType="CHAR" />
+    <result column="return_time" property="returnTime" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
+
+  <resultMap id="OrderProjectVO" type="com.cjc.crow.entity.OrderProjectVO">
+    <result column="project_name" property="projectName" jdbcType="CHAR" />
+    <result column="launch_name" property="launchName" jdbcType="CHAR" />
+    <result column="return_content" property="returnContent" jdbcType="CHAR" />
+    <result column="return_count" property="returnCount" jdbcType="INTEGER" />
+    <result column="support_price" property="supportPrice" jdbcType="INTEGER" />
+    <result column="freight" property="freight" jdbcType="INTEGER" />
+    <result column="purchase" property="purchase" jdbcType="INTEGER" />
+    <result column="signalpurchase" property="signalPurchase" jdbcType="INTEGER" />
+  </resultMap>
+
+  <resultMap id="orderDetailResultMap" type="com.cjc.crow.entity.OrderDetailVO">
+    <result column="receive_name" property="address.receiveName" jdbcType="CHAR" />
+    <result column="phone_num" property="address.phoneNum" jdbcType="CHAR" />
+    <result column="address" property="address.address" jdbcType="CHAR" />
+    <result column="invoice" property="invoice" jdbcType="CHAR" />
+    <result column="invoice_title" property="invoiceTitle" jdbcType="CHAR" />
+    <result column="order_remark" property="orderRemark" jdbcType="CHAR" />
+    <result column="project_name" property="orderProjectVO.projectName" jdbcType="CHAR" />
+    <result column="launch_name" property="orderProjectVO.launchName" jdbcType="CHAR" />
+    <result column="return_content" property="orderProjectVO.returnContent" jdbcType="CHAR" />
+    <result column="return_count" property="orderProjectVO.returnCount" jdbcType="INTEGER" />
+    <result column="support_price" property="orderProjectVO.supportPrice" jdbcType="INTEGER" />
+    <result column="freight" property="orderProjectVO.freight" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="selectProjectReturn" resultMap="OrderProjectVO">
+    SELECT p.project_name project_name,m.loginacct launch_name,r.content return_content,r.supportmoney support_price,r.freight freight,r.signalpurchase signalpurchase,r.purchase purchase  FROM t_return r
+LEFT JOIN t_project p ON r.projectid = p.id
+LEFT JOIN t_member m ON m.id = p.memberid
+WHERE r.id = #{returnId}
+  </select>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -73,6 +110,11 @@
     id, order_num, pay_order_num, order_amount, invoice, invoice_title, order_remark, 
     address_id
   </sql>
+  <select id="selectOrderDetailByOrderNum" resultMap="orderDetailResultMap">
+    SELECT a.*,o.invoice,o.invoice_title,op.*,o.order_remark FROM t_order o
+LEFT JOIN t_address a ON o.address_id = a.id
+LEFT JOIN t_order_project op ON op.order_id = o.id WHERE o.order_num = #{orderNum}
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cjc.crow.entity.OrderExample" >
     select
     <if test="distinct" >
@@ -96,10 +138,10 @@
   <insert id="insert" parameterType="com.cjc.crow.entity.Order" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     insert into t_order (id, order_num, pay_order_num, 
       order_amount, invoice, invoice_title, 
-      order_remark, address_id)
+      order_remark, address_id,create_time,status)
     values (#{id,jdbcType=INTEGER}, #{orderNum,jdbcType=CHAR}, #{payOrderNum,jdbcType=CHAR}, 
       #{orderAmount,jdbcType=DOUBLE}, #{invoice,jdbcType=INTEGER}, #{invoiceTitle,jdbcType=CHAR}, 
-      #{orderRemark,jdbcType=CHAR}, #{addressId,jdbcType=INTEGER})
+      #{orderRemark,jdbcType=CHAR}, #{addressId,jdbcType=INTEGER},#{createTime,jdbcType=CHAR},#{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.cjc.crow.entity.Order" >
     insert into t_order
@@ -128,6 +170,21 @@
       <if test="addressId != null" >
         address_id,
       </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="sendTime != null" >
+        send_time,
+      </if>
+      <if test="confirmTime != null" >
+        confirm_time,
+      </if>
+      <if test="returnTime != null" >
+        return_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -154,7 +211,25 @@
       <if test="addressId != null" >
         #{addressId,jdbcType=INTEGER},
       </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=CHAR},
+      </if>
+      <if test="confirmTime != null" >
+        #{confirmTime,jdbcType=CHAR},
+      </if>
+      <if test="returnTime != null" >
+        #{returnTime,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
     </trim>
+  </insert>
+  <insert id="insertReturnAndOrderId">
+    insert into t_order_return values(#{orderId},#{returnId});
   </insert>
   <select id="countByExample" parameterType="com.cjc.crow.entity.OrderExample" resultType="java.lang.Integer" >
     select count(*) from t_order
@@ -189,6 +264,21 @@
       <if test="record.addressId != null" >
         address_id = #{record.addressId,jdbcType=INTEGER},
       </if>
+      <if test="record.createTime != null" >
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.sendTime != null" >
+        #{sendTime,jdbcType=CHAR},
+      </if>
+      <if test="record.confirmTime != null" >
+        #{confirmTime,jdbcType=CHAR},
+      </if>
+      <if test="returnTime != null" >
+        #{returnTime,jdbcType=CHAR},
+      </if>
+      <if test="record.status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -203,7 +293,12 @@
       invoice = #{record.invoice,jdbcType=INTEGER},
       invoice_title = #{record.invoiceTitle,jdbcType=CHAR},
       order_remark = #{record.orderRemark,jdbcType=CHAR},
-      address_id = #{record.addressId,jdbcType=INTEGER}
+      address_id = #{record.addressId,jdbcType=INTEGER},
+    create_time =  #{createTime,jdbcType=CHAR},
+    send_time = #{send_time,jdbcType=CHAR},
+    confirm_time =  #{confirm_time,jdbcType=CHAR},
+    return_time = #{return_time,jdbcType=CHAR},
+    status = #{status,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

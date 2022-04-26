@@ -27,7 +27,14 @@ public class CrowdConstant {
 	public static final String MESSAGE_DETAIL_PICTURE_EMPTY = "详情图片为空";
 	public static final String MESSAGE_TEMPLE_PROJECT_MISSING = "临时存储的project已丢失";
 	public static final String ATTR_NAME_PORTAL_TYPE_VO_LIST = "portalTypeVOList";
+	public static final String ATTR_NAME_PORTAL__VO_LIST = "portalVOList";
+
 	public static final String MESSAGE_RESOURCE_VISIT_EXCEPTION = "访问资源出现错误";
 	public static final String ATTR_NAME_DETAIL_PROJECT = "detailProject";
+
+	public static final String DATE_PATTERN =  "yyyy-MM-dd HH:mm:ss";
+
+	// 发起众筹日期
+	public static final String DEPlOY_DATE_PATTERN="yyyy-MM-dd";
 }
 

@@ -25,8 +25,6 @@ public class RdisHandler {
     private StringRedisTemplate redisTemplate;
 
 
-
-
     @RequestMapping("/set/redis/key/value/remote")
     public ResultEntity<String> setRedisKeyValueRemote(
             @RequestParam("key") String key,

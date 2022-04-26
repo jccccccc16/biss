@@ -22,6 +22,6 @@ public interface OrderProjectMapper {
 
     int updateByExample(@Param("record") OrderProject record, @Param("example") OrderProjectExample example);
 
-    public OrderProjectVO selectOrderProjectVO(@Param("projectId")Integer projectId, @Param("returnId") Integer returnId);
+    public OrderProjectVO selectProjectReturnList(@Param("projectId")Integer projectId, @Param("returnId") Integer returnId);
 
 }

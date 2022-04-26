@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,6 +14,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * Time: 20:37
  * To change this template use File | Settings | File Templates.
  **/
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds=60*60)
 @EnableFeignClients
 @EnableConfigurationProperties({AlipayProperties.class})
 @SpringBootApplication

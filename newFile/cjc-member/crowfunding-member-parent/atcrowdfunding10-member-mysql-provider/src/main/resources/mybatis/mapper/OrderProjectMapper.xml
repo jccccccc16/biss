@@ -74,7 +74,8 @@
     order_id
   </sql>
 
-  <select id="selectOrderProjectVO" resultType="com.cjc.crow.entity.OrderProjectVO" >
+<!--  获取项目的回报-->
+  <select id="selectProjectReturnList" resultType="com.cjc.crow.entity.OrderProjectVO" >
     SELECT
         p.project_name projectName,
 	    m.username launchName,

@@ -1,8 +1,9 @@
 package com.cjc.crow.mapper;
 
-import com.cjc.crow.entity.Order;
-import com.cjc.crow.entity.OrderExample;
+import com.cjc.crow.entity.*;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface OrderMapper {
@@ -19,4 +20,10 @@ public interface OrderMapper {
     int updateByExampleSelective(@Param("record") Order record, @Param("example") OrderExample example);
 
     int updateByExample(@Param("record") Order record, @Param("example") OrderExample example);
+
+    OrderProjectVO selectProjectReturn(@Param("returnId")Integer returnId);
+
+    int insertReturnAndOrderId(@Param("orderId") Integer orderId,@Param("returnId")Integer returnId);
+
+    OrderDetailVO selectOrderDetailByOrderNum(@Param("orderNum")String orderNum);
 }

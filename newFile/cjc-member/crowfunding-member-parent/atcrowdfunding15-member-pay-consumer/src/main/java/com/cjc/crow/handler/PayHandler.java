@@ -10,6 +10,7 @@ import com.cjc.crow.config.AlipayProperties;
 import com.cjc.crow.entity.OrderProjectVO;
 import com.cjc.crow.entity.OrderVO;
 import com.cjc.crow.util.ResultEntity;
+import com.netflix.discovery.converters.Auto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,8 @@ public class PayHandler {
 
     @Autowired
     private MySqlRemoteService mySqlRemoteService;
+
+
 
     private Logger logger = LoggerFactory.getLogger(PayHandler.class);
 
@@ -139,7 +142,15 @@ public class PayHandler {
 
     }
 
-    @ResponseBody
+    /**
+     * 订单创建成功后，支付宝的回调接口
+     * @param request
+     * @param session
+     * @return
+     * @throws AlipayApiException
+     * @throws UnsupportedEncodingException
+     */
+
     @RequestMapping("/return")
     public String returnUrlMethod(HttpServletRequest request, HttpSession session) throws AlipayApiException, UnsupportedEncodingException {
         // 获取支付宝GET过来反馈信息
@@ -181,18 +192,21 @@ public class PayHandler {
 
             // 2.将支付宝交易号设置到OrderVO对象中
             orderVO.setPayOrderNum(payOrderNum);
-
-            // 3.发送给MySQL的远程接口
+            // 3.发送给MySQL的远程接口，保存订单
             ResultEntity<String> resultEntity = mySqlRemoteService.saveOrderRemote(orderVO);
+
+            // 更新项目支持人数
+            mySqlRemoteService.updateProjectSupporterByReturn(orderVO.getOrderProjectVO().getReturnId());
+
             logger.info("Order save result="+resultEntity.getResult());
             logger.info("Order save message="+resultEntity.getMessage());
-
-            return "trade_no:"+payOrderNum+"<br/>out_trade_no:"+orderNum+"<br/>total_amount:"+orderAmount;
+            logger.info("orderNum: "+orderNum+",payOrderNum: "+payOrderNum+", orderAmount: "+orderAmount);
+            // 跳转到用户中心
+            return "redirect:http://localhost/auth/member/to/center.html";
         }else {
 
             // 页面显示信息：验签失败
-            return "验签失败";
-
+            throw new RuntimeException("支付失败");
         }
     }
 

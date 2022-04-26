@@ -4,17 +4,17 @@ import com.cjc.crow.api.MySqlRemoteService;
 import com.cjc.crow.api.RedisRemoteService;
 import com.cjc.crow.config.ShortMessageProperties;
 import com.cjc.crow.constant.CrowdConstant;
-import com.cjc.crow.entity.Member;
-import com.cjc.crow.entity.MemberLoginVO;
-import com.cjc.crow.entity.MemberVO;
+import com.cjc.crow.entity.*;
 import com.cjc.crow.util.CrowdUtil;
 import com.cjc.crow.util.ResultEntity;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -276,6 +277,15 @@ public class MemberHandler {
 
     }
 
+    @RequestMapping("auth/member/to/center.html")
+    public String toMemberCenter(
+            Model model
+    ){
+
+        return "member-center";
+
+    }
+
 
 //    @RequestMapping("/member/my/crowd")
 //    public String toMyCrowd(HttpSession session,ModelMap modelMap){
@@ -295,6 +305,49 @@ public class MemberHandler {
 //        return "member-center";
 //    }
 //
+
+    /**
+     * 获取我支持的列表
+     * @param memberId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/get/my/support/project/by/{memberId}.json")
+    public ResultEntity<PageInfo<MySupportProjectVO>> getMySupportProjectVOList(
+            @PathVariable("memberId") Integer memberId,
+            @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value = "pageSize",defaultValue ="3" ) Integer pageSize
+    ){
+        ResultEntity<PageInfo<MySupportProjectVO>> mySupportProjectVOPageInfo = mySqlRemoteService.getMySupportProjectVOList(memberId,pageNum,pageSize);
+        return mySupportProjectVOPageInfo;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("get/my/launch/project/by/{memberId}.json")
+    public ResultEntity<PageInfo<MyLaunchProjectVO>> getMyLaunchProjectVOPageInfo(
+            @PathVariable("memberId") Integer memberId,
+            @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value = "pageSize",defaultValue ="3" ) Integer pageSize
+    ){
+        ResultEntity<PageInfo<MyLaunchProjectVO>> myLaunchProjectVOPageInfo
+                = mySqlRemoteService.getMyLaunchProjectVOPageInfo(memberId, pageNum, pageSize);
+
+        return myLaunchProjectVOPageInfo;
+    }
+
+
+    @RequestMapping("to/order/detail.html")
+    public ResultEntity<PageInfo<MyLaunchProjectVO>> toOrderDetail(
+            @PathVariable("memberId") Integer memberId,
+            @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value = "pageSize",defaultValue ="3" ) Integer pageSize
+    ){
+        ResultEntity<PageInfo<MyLaunchProjectVO>> myLaunchProjectVOPageInfo
+                = mySqlRemoteService.getMyLaunchProjectVOPageInfo(memberId, pageNum, pageSize);
+
+        return myLaunchProjectVOPageInfo;
+    }
 
 
 }

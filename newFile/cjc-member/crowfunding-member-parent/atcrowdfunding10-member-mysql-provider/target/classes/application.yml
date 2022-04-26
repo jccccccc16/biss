@@ -7,13 +7,18 @@ spring:
   datasource:
     name: mydb
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/crowd-member?serverTimezone=UTC
+    url: jdbc:mysql://114.132.251.6/cjccrowd?serverTimezone=UTC
     username: root
-    password: cjcisgood
+    password: cjcisgood1316
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
 
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countsql
 
 eureka:
   client:

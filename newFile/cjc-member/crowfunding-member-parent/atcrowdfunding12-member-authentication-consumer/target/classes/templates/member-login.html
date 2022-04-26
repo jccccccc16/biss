@@ -19,7 +19,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <div><a class="navbar-brand" href="index.html" style="font-size:32px;">尚筹网-创意产品众筹平台</a></div>
+          <div><a class="navbar-brand" href="index.html" style="font-size:32px;">牛马众筹 - 大学生创新创业众筹平台</a></div>
         </div>
       </div>
     </nav>
@@ -31,15 +31,15 @@
           <p th:text="${message}">显示登录失败的信息</p>
           <p th:text="${session.message}">登陆检查不通过时的提示信息</p>
 		  <div class="form-group has-success has-feedback">
-			<input type="text" class="form-control" name="loginacct" id="inputSuccess4" placeholder="请输入登录账号" autofocus>
+			<input type="text" class="form-control" name="loginacct"  placeholder="请输入登录账号" autofocus>
 			<span class="glyphicon glyphicon-user form-control-feedback"></span>
 		  </div>
 		  <div class="form-group has-success has-feedback">
-			<input type="text" class="form-control" name="userpswd" id="inputSuccess4" placeholder="请输入登录密码" style="margin-top:10px;">
+			<input type="text" class="form-control" name="userpswd"  placeholder="请输入登录密码" style="margin-top:10px;">
 			<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 		  </div>
           <div class="checkbox" style="text-align:right;"><a href="" th:href="@{/auth/member/to/reg/page.html}">我要注册</a></div>
-        <button type="submit" class="btn btn-lg btn-success btn-block"> 登录</button>
+        <button type="submit" class="btn btn-lg btn-primary btn-block"> 登录</button>
       </form>
     </div>
     <script src="jquery/jquery-2.1.1.min.js"></script>

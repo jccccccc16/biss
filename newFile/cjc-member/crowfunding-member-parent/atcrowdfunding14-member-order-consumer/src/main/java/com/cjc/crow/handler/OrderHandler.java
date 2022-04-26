@@ -4,6 +4,7 @@ import com.cjc.crow.api.MySqlRemoteService;
 import com.cjc.crow.constant.CrowdConstant;
 import com.cjc.crow.entity.Address;
 import com.cjc.crow.entity.MemberLoginVO;
+import com.cjc.crow.entity.OrderDetailVO;
 import com.cjc.crow.entity.OrderProjectVO;
 import com.cjc.crow.util.ResultEntity;
 import org.slf4j.Logger;
@@ -11,10 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -34,29 +33,48 @@ public class OrderHandler {
 
     private Logger logger = LoggerFactory.getLogger(OrderHandler.class);
 
+    /**
+     * 获取项目的具体回报
+     *
+     * @param projectId
+     * @param returnId
+     * @param session
+     * @return
+     */
     @RequestMapping("/confirm/return/info/{projectId}/{returnId}")
     public String showReturnConfirmInfo(@PathVariable("projectId") Integer projectId,
                                         @PathVariable("returnId") Integer returnId,
                                         HttpSession session){
 
+         // 获取该项目的回报项目相关信息
         ResultEntity<OrderProjectVO> resultEntity = mySqlRemoteService.getOrderProjectVORemote(projectId,returnId);
+
 
         // 如果获取成功
         if(ResultEntity.SUCCESS.equals(resultEntity.getResult())){
             OrderProjectVO data = resultEntity.getData();
+            // 初始化 汇报数量为1
+            data.setReturnId(returnId);
+            data.setReturnCount(1);
+            data.setProjectId(projectId);
             session.setAttribute("orderProjectVO",data);
-
+            session.setAttribute("projectId",projectId);
             logger.info("查找到的data :" + data);
         }else{
             logger.info(resultEntity+"");
             logger.info("查找OrderProjectVO失败");
         }
-
         return "confirm_return";
 
     }
 
 
+    /**
+     * 确定订单,结算页面
+     * @param returnCount
+     * @param session
+     * @return
+     */
     @RequestMapping("/confirm/order/{returnCount}")
     public String confirmOrder(
             @PathVariable("returnCount") Integer returnCount,
@@ -67,7 +85,6 @@ public class OrderHandler {
         orderProjectVO.setReturnCount(returnCount);
 
         // 获取该用户信息
-
         MemberLoginVO memberLoginVO = (MemberLoginVO) session.getAttribute(CrowdConstant.ATTR_NAME_LOGIN_MEMBER);
 
         Integer id = memberLoginVO.getId();
@@ -93,5 +110,24 @@ public class OrderHandler {
         return resultEntity;
     }
 
-
+    /**
+     * 获取订单详情
+     * @param orderNum
+     * @param modelMap
+     * @return
+     */
+    @GetMapping("/get/detail/{orderNum}")
+    public String getOrderDetail(
+            @PathVariable("orderNum") String orderNum,
+            ModelMap modelMap
+    ){
+        ResultEntity<OrderDetailVO> resultEntity = mySqlRemoteService.getOrderDetailByOrderNum(orderNum);
+        OrderDetailVO data = resultEntity.getData();
+        if(data!=null){
+            logger.info(data.toString());
+            modelMap.addAttribute("orderDetail",data);
+            return "order-detail";
+        }
+        throw new RuntimeException("订单为空");
+    }
 }

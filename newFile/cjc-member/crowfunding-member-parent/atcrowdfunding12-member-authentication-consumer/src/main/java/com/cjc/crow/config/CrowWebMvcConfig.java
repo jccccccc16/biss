@@ -32,14 +32,6 @@ public class CrowWebMvcConfig implements WebMvcConfigurer {
 
         registry.addViewController(loginUrlPath).setViewName(loginViewName);
 
-        String memberUrlPath = "/auth/member/to/center.html";
-        String memberViewName = "member-center";
-        // 用户页面
-        registry.addViewController(memberUrlPath).setViewName(memberViewName);
-
-
-        // 我的众筹
-        registry.addViewController("/member/my/crowd").setViewName("member_crowd");
 
 
 
