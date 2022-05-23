@@ -37,7 +37,7 @@ public class OrderHandler {
             ModelMap modelMap
     ){
         PageInfo<OrderPO> orderPageInfo =
-                orderService.getOrderPageInfo(keyword, pageNum, pageSize);
+                orderService.getOrderPageInfo(keyword, pageNum, pageSize,null);
         modelMap.addAttribute("pageInfo",orderPageInfo);
         return "order-page";
     }
@@ -59,6 +59,17 @@ public class OrderHandler {
         OrderDetailVO orderDetailVO = orderService.getOrderDetailVOByOrderNum(orderNum);
         modelMap.addAttribute("orderDetailVO",orderDetailVO);
         return "order-detail";
+    }
+
+
+    @RequestMapping("/get/order/refund.html")
+    public String getOrderRefundPage( @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,
+                                      @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+                                      ModelMap modelMap){
+        PageInfo<OrderPO> orderPageInfo =
+                orderService.getOrderPageInfo("", pageNum, pageSize,4);
+        modelMap.addAttribute("pageInfo",orderPageInfo);
+        return "order-refund-page";
     }
 
 }

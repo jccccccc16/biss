@@ -19,6 +19,8 @@ import java.util.List;
 public interface MySqlRemoteService {
 
 
+
+
     @RequestMapping("/get/memberpo/by/login/acct/remote")
     ResultEntity<Member> getMemberByLoginAcct(@RequestParam("loginacct") String loginAcct);
 
@@ -117,4 +119,12 @@ public interface MySqlRemoteService {
     ResultEntity<OrderDetailVO> getOrderDetailByOrderNum(
             @PathVariable("orderNum") String  orderNum
     );
+
+    @ResponseBody
+    @RequestMapping("/get/project/po/by/{id}")
+    ResultEntity<ProjectPO> getProjectById(@PathVariable("id")Integer id);
+
+    @ResponseBody
+    @RequestMapping("/remove/project/po/by/{id}")
+    ResultEntity<Integer> removeProject(Integer id);
 }

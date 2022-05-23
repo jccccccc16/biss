@@ -55,6 +55,7 @@ public class CrowdCheckProjectScheduled {
                                 +projectPO.getProjectName()+
                                 "超过众筹期限，众筹失败!");
                 setStatus(projectPO);
+                projectService.updateSelective(projectPO);
                 continue;
             }
         }

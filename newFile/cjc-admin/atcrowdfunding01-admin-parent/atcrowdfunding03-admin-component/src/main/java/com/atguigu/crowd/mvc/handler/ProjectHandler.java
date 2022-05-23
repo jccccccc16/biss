@@ -127,7 +127,7 @@ public class ProjectHandler {
     @RequestMapping("/to/get/projects/page.html")
     public String toProjectPage(
             ModelMap modelMap,
-            @RequestParam(value = "pageSize",defaultValue = "3")Integer pageSize,
+            @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize,
 
             @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum
     ){
@@ -136,6 +136,10 @@ public class ProjectHandler {
         modelMap.addAttribute("pageInfo",projects);
         return "projects-page";
     }
+
+
+
+    
 
 
 

@@ -36,9 +36,10 @@ zuul:
     connect-timeout-millis: 1500
     socket-timeout-millis: 60000
   sensitive-headers: "*"
+
 ribbon:
-  ReadTimeout: 60000
-  SocketTimeout: 60000
+  ConnectTimeout: 10000 # ribbon链接超时时长
+  ReadTimeout: 10000 # ribbon读取超时时间长
 
 hystrix:
   command:

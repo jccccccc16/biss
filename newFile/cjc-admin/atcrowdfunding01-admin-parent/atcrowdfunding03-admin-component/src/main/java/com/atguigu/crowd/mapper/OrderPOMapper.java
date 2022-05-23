@@ -31,7 +31,7 @@ public interface OrderPOMapper {
 
     int updateByPrimaryKey(OrderPO record);
 
-    List<OrderPO> selectOrderList(@Param("keyword") String keyword);
+    List<OrderPO> selectOrderList(@Param("keyword") String keyword,@Param("status")Integer status);
 
 
     OrderDetailVO selectOrderDetail(String orderNum);

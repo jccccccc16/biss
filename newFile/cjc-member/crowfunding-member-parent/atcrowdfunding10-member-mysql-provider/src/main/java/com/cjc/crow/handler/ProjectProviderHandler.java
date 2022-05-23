@@ -182,4 +182,29 @@ public class ProjectProviderHandler {
         return ResultEntity.failed("更新项目支持人数失败");
     }
 
+
+    @ResponseBody
+    @RequestMapping("/get/project/po/by/{id}")
+    ResultEntity<ProjectPO> getProjectById(@PathVariable("id")Integer id){
+        ProjectPO projectById = projectService.getProjectById(id);
+        if(projectById==null){
+            return ResultEntity.failed("没有该项目");
+        }
+        return ResultEntity.successWithData(projectById);
+    }
+
+    @ResponseBody
+    @RequestMapping("/remove/project/po/by/{id}")
+    ResultEntity<Integer> removeProject(Integer id){
+        ProjectPO projectById = projectService.getProjectById(id);
+        if(projectById==null){
+            return ResultEntity.failed("没有该项目");
+        }
+        Integer result = projectService.removeProject(id);
+        if(result==0){
+            return ResultEntity.failed("删除失败");
+        }
+        return ResultEntity.successWithoutData();
+    }
+
 }

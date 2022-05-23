@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface OrderService {
 
-    public PageInfo<OrderPO> getOrderPageInfo(String keyword, Integer pageNum, Integer pageSize);
+    public PageInfo<OrderPO> getOrderPageInfo(String keyword, Integer pageNum, Integer pageSize,Integer status);
 
     /**
      * 根据订单号查询详情
@@ -18,4 +18,9 @@ public interface OrderService {
      * @return
      */
     public OrderDetailVO getOrderDetailVOByOrderNum(@Param("orderNum") String OrderNum);
+
+
+    public OrderPO getOrderPOById(Integer id);
+
+    int updateOrder(OrderPO orderPO);
 }

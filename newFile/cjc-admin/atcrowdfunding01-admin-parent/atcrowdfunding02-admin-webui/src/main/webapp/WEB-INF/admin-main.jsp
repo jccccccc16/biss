@@ -25,7 +25,7 @@
 <%--				访问SecurityAdmin对象的属性：<security:authentication property="principal.originalAdmin.email"/><br/>--%>
 <%--				访问SecurityAdmin对象的属性：<security:authentication property="principal.originalAdmin.createTime"/><br/>--%>
 				<div class="row placeholders">
-					<security:authorize access="hasRole('经理')">
+					<security:authorize access="hasRole('admin')">
 						<div class="col-xs-6 col-sm-3 placeholder">
 							<img data-src="holder.js/200x200/auto/sky" class="img-responsive"
 								alt="Generic placeholder thumbnail">

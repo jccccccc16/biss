@@ -32,4 +32,6 @@ ali:
     sign-type: RSA2
 
 
-# https://openhome.alipay.com/platform/appDaily.htm?tab=account
+ribbon:
+  ConnectTimeout: 10000 # ribbon链接超时时长
+  ReadTimeout: 10000 # ribbon读取超时时间长

@@ -115,7 +115,7 @@ function filledTheTable(pageInfo) {
         var operationTD = "<td style=\"vertical-align:middle;\">\n" +
             "                                                    <div class=\"btn-group-vertical\" role=\"group\" aria-label=\"Vertical button group\">\n" +
             "                                                          <a type=\"button\" class=\"btn btn-default\">删除订单</a>\n" +
-            "                                                          <a type=\"button\"  href=\"http://localhost/order/get/detail/"+orderNum+"\" class=\"btn btn-default\">交易详情</button>\n" +
+            "                                                          <a type=\"button\"  href=\"http://localhost/order/get/detail/"+orderNum+"\" class=\"btn btn-default\">交易详情</a>\n" +
             "                                                    </div>\n" +
             "                                                  </td>";
         var tr = "<tr>"+projectDetailTD+supportDateTD+freightTD+returnTd+statusTD+operationTD+"</tr>";
@@ -293,8 +293,8 @@ function filledLaunchProjectTable(pageInfo){
             "                                                    <div class=\"btn-group-vertical\" role=\"group\"\n" +
             "                                                         aria-label=\"Vertical button group\">\n" +
             "                                                        <a href=\"http://localhost/project/show/detail/project/"+projectId+ "\" type=\"button\" class=\"btn btn-default\">查看项目</a>\n" +
-            "                                                        <button type=\"button\" class=\"btn btn-default\">修改项目</button>\n" +
-            "                                                        <button type=\"button\" class=\"btn btn-default\">删除项目</button>\n"
+            "                                                        " +
+            "                                                       "
             "                                                    </div>\n" +
             "                                                </td>";
         var tr = "<tr>"+projectDetailTD+freightTD+currentStatusTD+operationTD+"</tr>";
@@ -343,4 +343,8 @@ function MyLaunchPaginationCallBack(pageIndex, jQuery) {
     // 取消页码超链接的默认行为
     return false;
 }
+
+
+
+
 

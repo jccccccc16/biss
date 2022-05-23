@@ -84,6 +84,7 @@ public class CrowdAccessFilter extends ZuulFilter {
         // 判断loginMember是否为空
 
         if(loginMember==null){
+            try {
         // 跳转到登录页面
             logger.info("session中loginMember为空");
             HttpServletResponse response = requestContext.getResponse();
@@ -92,8 +93,8 @@ public class CrowdAccessFilter extends ZuulFilter {
 
             // 重定向到登录页面
 
-            try {
-                response.sendRedirect("/auth/member/to/login/page.html");
+
+                response.sendRedirect("http://localhost/auth/member/to/login/page.html");
             } catch (IOException e) {
                 e.printStackTrace();
             }

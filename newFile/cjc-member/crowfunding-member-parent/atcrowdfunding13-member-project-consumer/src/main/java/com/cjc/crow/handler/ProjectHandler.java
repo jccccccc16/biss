@@ -300,6 +300,23 @@ public class ProjectHandler {
     }
 
 
+    @RequestMapping("/remove/project/{id}")
+    @ResponseBody
+    public ResultEntity<Integer> removeProject(@PathVariable("id") Integer id){
+
+
+        ResultEntity<Integer> resultEntity = mySqlRemoteService.removeProject(id);
+        return resultEntity;
+
+    }
+
+
+
+
+
+
+
+
 
 
 

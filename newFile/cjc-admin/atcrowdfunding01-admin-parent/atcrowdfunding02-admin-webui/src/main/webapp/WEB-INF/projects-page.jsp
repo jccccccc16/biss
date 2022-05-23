@@ -45,21 +45,13 @@
     function pageSelectCallback(pageIndex, jQuery) {
         // 得到我们传回后台的pageNum
         var pageNum = pageIndex + 1;
-        <c:if test="${empty param.keyword}">
         window.location.href = "project/get/project/to/be/review/page.html?pageNum=" + pageNum;
-        </c:if>
-        <c:if test="${ !empty param.keyword}">
-        window.location.href = "admin/get/page.html?pageNum=" + pageNum + "&keyword=" +${param.keyword};
-        </c:if>
         return false;
     }
 
 
     function deleteAttention(AdminId) {
-        // if(){
-        //     alert("不能删除自己")
-        //     return false;
-        // }
+
         if (confirm("确定删除吗")) {
             return true;
         } else {

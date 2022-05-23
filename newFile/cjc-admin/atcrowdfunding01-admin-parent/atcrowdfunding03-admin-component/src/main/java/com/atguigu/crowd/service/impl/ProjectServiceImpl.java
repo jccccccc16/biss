@@ -40,8 +40,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     private Logger logger = LoggerFactory.getLogger(ProjectServiceImpl.class);
 
-//    @Autowired
-//    private MemberMapper memberMapper;
+
 
     @Override
     public PageInfo<ProjectPO> getToBeReviewProject(Integer pageNum, Integer pageSize) {
@@ -121,7 +120,9 @@ public class ProjectServiceImpl implements ProjectService {
 
         ReviewProjectAdminExample reviewProjectAdminExample = new ReviewProjectAdminExample();
         reviewProjectAdminExample.createCriteria().andProjectIdEqualTo(projectId);
+        // 查询数据库是否有该审核数据
         List<ReviewProjectAdmin> reviewProjectAdmins = reviewProjectAdminMapper.selectByExample(reviewProjectAdminExample);
+        // 如果为空
         // 是否是第一次审核
         isDiErCiShenHe = (reviewProjectAdmins != null);
         // 插入审核表
@@ -174,6 +175,7 @@ public class ProjectServiceImpl implements ProjectService {
                 reviewProjectAdminMapper.insert(reviewProjectAdmin);
                 // 审核通过设置为1，备注设置为无
                 projectPO.setStatus(1);
+                projectPO.setMessage("");
                 int i = projectPOMapper.updateByPrimaryKeySelective(projectPO);
                 return i;
             }

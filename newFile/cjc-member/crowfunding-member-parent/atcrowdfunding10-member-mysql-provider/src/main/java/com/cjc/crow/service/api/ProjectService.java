@@ -20,4 +20,8 @@ public interface ProjectService {
     int updateProjectSupporter(Integer projectId);
 
     PageInfo<PortalProjectVO> getPortalProjectList(Integer pageNum,Integer pageSize);
+
+    public ProjectPO getProjectById(Integer id);
+
+    Integer removeProject(Integer id);
 }

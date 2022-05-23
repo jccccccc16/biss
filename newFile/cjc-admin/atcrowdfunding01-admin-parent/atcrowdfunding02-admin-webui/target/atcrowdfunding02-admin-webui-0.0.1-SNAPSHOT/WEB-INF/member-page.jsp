@@ -124,14 +124,7 @@
 											<!-- <button type="button" class="btn btn-success btn-xs">
                                                 <i class=" glyphicon glyphicon-check"></i>
                                             </button> -->
-											<a title="查看众筹项目" href="assign/to/assign/role/page.html?adminId=${admin.id }&pageNum=${requestScope.pageInfo.pageNum }&keyword=${param.keyword }" class="btn btn-info btn-xs"><i class=" glyphicon glyphicon-briefcase"></i></a>
-											<!-- 旧代码 -->
-											<!-- <button type="button" class="btn btn-primary btn-xs">
-                                                <i class=" glyphicon glyphicon-pencil"></i>
-                                            </button> -->
-											<!-- 新代码 -->
-											<a title="查看支持项目" href="admin/to/edit/page.html?adminId=${admin.id }&pageNum=${requestScope.pageInfo.pageNum }&keyword=${param.keyword }" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-folder-open"></i></a>
-
+											<a title="修改状态" href="assign/to/assign/role/page.html?adminId=${admin.id }&pageNum=${requestScope.pageInfo.pageNum }&keyword=${param.keyword }" class="btn btn-info btn-xs"><i class=" glyphicon glyphicon-briefcase"></i></a>
 										</td>
                                     </tr>
                                 </c:forEach>

@@ -50,6 +50,21 @@ public class ProjectServiceImpl implements ProjectService {
 
     private Logger logger = LoggerFactory.getLogger(ProjectServiceImpl.class);
 
+    public ProjectPO getProjectById(Integer id){
+        ProjectPOExample projectPOExample = new ProjectPOExample();
+        projectPOExample.createCriteria().andIdEqualTo(id);
+        List<ProjectPO> projectPOS = projectPOMapper.selectByExample(projectPOExample);
+        if(projectPOS==null || projectPOS.size()==0){
+            return null;
+        }
+        return projectPOS.get(0);
+    }
+
+    public Integer removeProject(Integer id) {
+
+        return projectPOMapper.deleteByPrimaryKey(id);
+    }
+
     @Transactional(readOnly = false,propagation = Propagation.REQUIRES_NEW,rollbackFor = Exception.class)
     public void saveProject(ProjectVO projectVO, Integer memberId) {
 

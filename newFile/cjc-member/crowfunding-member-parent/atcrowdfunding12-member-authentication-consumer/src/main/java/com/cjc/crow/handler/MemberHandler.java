@@ -133,54 +133,10 @@ public class MemberHandler {
         // ② 将memberVo中的手机号进行拼接成redis中的key
         String key = CrowdConstant.REDIS_CODE_PREFIX + phoneNum;
 
-//        // ③ 根据此key在redis中查找
-//        ResultEntity<String> redisResultEntity = redisRemoteService.getRedisStringByKeyRemote(key);
-//
-//        // ④ 检查查询操作是否有效
-//        String result = redisResultEntity.getResult();
-//
-//        // 判断是否失败
-//        if (ResultEntity.FAILED.equals(result)) {
-//
-//            logger.info(redisResultEntity.getMessage());
-//
-//            map.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, redisResultEntity.getMessage());
-//
-//            return "member-reg";
-//        }
-
-
-//        // 2.判断验证码是否为空
-//        String redisCode = redisResultEntity.getData();
-
-        // 判断验证是否为空
-//        if (redisCode == null || redisCode.equals("")) {
-//
-//            logger.info("redis中的验证码为空");
-//
-//            map.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, CrowdConstant.MESSAGE_CODE_NOT_EXIST);
-//
-//            return "member-reg";
-//        }
-
-
-//        // 获取表单的验证码
-//        String formCode = memberVO.getCode();
-//
-//        // 如果验证码不正确
-//        if (!formCode.equals(redisCode)) {
-//
-//            logger.info("验证码不正确");
-//
-//            map.addAttribute(CrowdConstant.ATTR_NAME_MESSAGE, CrowdConstant.MESSAGE_CODE_INVALID);
-//
-//            return "member-reg";
-//
-//        }
-
-
-        // ① 正确，将验证码移出
-//        redisRemoteService.removeRedisKeyRemote(key);
+        ResultEntity<Member> memberByLoginAcct = mySqlRemoteService.getMemberByLoginAcct(memberVO.getLoginacct());
+        if(memberByLoginAcct!=null){
+            return "redirect:http://localhost/auth/member/to/register/page.html";
+        }
 
         // 4.执行密码加密
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();

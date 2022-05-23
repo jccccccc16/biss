@@ -67,22 +67,6 @@ public class OperLogAspect {
 
     @Around("AnnotationCutPoint() ")
     public Object aroundMethod(ProceedingJoinPoint joinPoint) throws Throwable {
-//        Object returnValue = null;
-//
-//            // 前置通知
-//            beforeMethod(joinPoint);
-//
-//            // 执行方法体
-//            returnValue = joinPoint.proceed();
-//
-//            // 后置通知
-//            afterMethod(joinPoint);
-//
-//            // 插入日志
-//            operLogService.saveOperLog(operLog);
-//            logger.info("操作者：" + operLog.getOperName() + "业务类型：" + operLog.getBusinessType() + ",访问：" + operLog.getStatus() + ",访问时间：" + operLog.getCreateTime());
-//            // 插入日志
-//            return returnValue;
 
         Object returnValue = null;
         Throwable currentThrowable=null;
